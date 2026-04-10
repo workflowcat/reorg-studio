@@ -1,16 +1,17 @@
 // Дослідницький контент для оглядової / головної сторінки.
-// Секції збагачено з чотирьох паралельних research-прогонів, заархівованих
-// у /research/ у цьому репо:
+// Секції збагачено з трьох паралельних research-прогонів, заархівованих
+// verbatim у /research/ у цьому репо для рецензентів:
 //   benchmarks.md  — як Anduril, Shield AI, Saronic, Skydio, Epirus,
 //                    Hadrian і Helsing насправді будували команди
 //                    при чисельності 20 → 100+
-//   theory.md      — Skunk Works, IPT, спектр сили матриці,
-//                    Conway's Law, 70/30 dual portfolio, що ламається
-//                    на кожному переході масштабу
 //   compliance.md  — ISO 9001/AS9100, MIL-STD, TRL, ITAR/EAR, CMMC/
-//                    NIST 800-171 і як compliance формує орг-структуру
-//   hiring.md      — критичні перші найми, defense IQ, реалії з
-//                    допусками, хвилі найму 20 → 50 → 100+
+//                    NIST 800-171, IV&V і як compliance формує орг
+//   hiring.md      — критичні перші найми, defense IQ, compensation
+//                    з Levels.fyi, реалії з допусками, хвилі найму
+//
+// Секція Org design theory опирається на встановлений academic-канон
+// (Skunk Works, IPT, Conway, Dunbar, Team Topologies) і не потребує
+// окремого research-брифу.
 //
 // Джерела залишаємо на картках, щоб рецензенти могли перевірити провенанс.
 
@@ -130,6 +131,44 @@ export const OVERVIEW: OverviewSection[] = [
         sources: [
           { label: "Ghost Shark: prototype to fleet in 3 years", url: "https://www.anduril.com/news/ghost-shark-enters-program-of-record-from-prototype-to-fleet-in-three-years" },
           { label: "Skydio National Security Advisory Board", url: "https://www.skydio.com/blog/skydio-announces-new-national-security-advisory-board-with-leading-experts-in-national-security-and" },
+        ],
+      },
+      {
+        title: "Skydio, Epirus, Hadrian, Helsing — чотири різні архетипи",
+        body: [
+          "Для повноти картини, чотири менш обговорюваних компанії з benchmark-вибірки, кожна з яких ілюструє окремий архетип масштабування.",
+          "Skydio зробила dual-use перехід — consumer/enterprise prosumer → ~50%+ defense — з видимою organizational-сигнатурою. Named discipline leads з широкими spans: Hayk Martiros керує Autonomy як VP з ~50 researchers. Geographic engineering-стратегія: San Mateo HQ (autonomy core), Boston (MIT talent), Zürich (новий 2026 R&D office для multi-vehicle coordination у GPS-denied nav). Патерн 'pull talent to talent hubs, не форсувати relocation' повторюється у всіх цих компаніях.",
+          "Epirus (заснована 2018) — найбільш 'defense-native': плато на ~240 осіб до початку 2026, CTO Matt Markel — ex-Raytheon radar engineer. ~150 осіб у Torrance HQ (100k+ sqft) 'spanning multiple Engineering disciplines and Business Development units' — R&D + BD живуть разом. Explicit separation: 'Engineering disciplines' vs 'BD'. Вони свідомо нарощували domain expertise через наймання з Raytheon і пішли на повільніший growth curve як tradeoff.",
+          "Hadrian (заснована 2021) — найчистіший приклад manufacturing-as-a-product мислення. CEO Chris Power: 'Наша філософія — парувати software engineers з людьми, які реально знають, що роблять. Ми керуємо заводом — там немає місця для bullshit software.' Head of quality — Matthew Mueller, ex-SpaceX senior manufacturing. Імпорт senior quality-лідерства з SpaceX/Lockheed, а не органічне вирощування — це дуже поширений патерн у цій вибірці.",
+          "Helsing (заснована 2021) — 500 працівників у Німеччині, Франції, UK до 2024. Засновники покривають три осі: Gundbert Scherf (German MoD veteran), Niklas Köhler (AI research), Torsten Reil (repeat entrepreneur). Той самий 'one founder per axis' патерн, що у Shield AI. Незвичайний масштабний вибір: expansion через юрисдикції (Естонія, UK, Франція), а не через нові продукти. €70M Естонський майданчик включає production — R&D і production розділені географічно, але під однією legal/program структурою.",
+        ],
+        sources: [
+          { label: "Skydio Zürich R&D", url: "https://dronexl.co/2026/04/06/skydio-zurich-rd-office-autonomous-drone/" },
+          { label: "Epirus HQ expansion", url: "https://www.epirusinc.com/press-releases/epirus-is-expanding-high-tech-company-opens-new-corporate-headquarters-in-torrance-california" },
+          { label: "Contrary Research Epirus", url: "https://research.contrary.com/company/epirus" },
+          { label: "Breaking Defense on Hadrian", url: "https://breakingdefense.com/2024/08/how-startup-hadrian-plans-to-take-over-the-defense-manufacturing-world/" },
+          { label: "Helsing Series D", url: "https://techfundingnews.com/helsing-raises-600m-series-d-european-defence/" },
+          { label: "Contrary Research Helsing", url: "https://research.contrary.com/company/helsing" },
+        ],
+      },
+      {
+        title: "Anduril Lattice team breakdown — конкретні пропорції",
+        body: [
+          "Найкращий публічний datapoint для планування ratio функцій — Anduril's Lattice Solutions team breakdown, опублікований на Built In. При загальному штаті ~6 200 осіб (2 590 інженерів, ~42%), окрема Lattice-команда розподіляється так:",
+        ],
+        bullets: [
+          "Engineering: 99+ — найбільша категорія",
+          "Operations / Support: 99+ — практично рівна engineering",
+          "HR / Recruiting: 57 — рекрутинг в defense потребує cleared-специфічних воркфлоу, звідси розмір",
+          "Program / Project Management: 57 — майже рівно з HR. У SaaS PMO зазвичай у 3–5x менше",
+          "Finance: 19 · Customer Success: 17 · AI/ML: 13 · Sales: 13",
+          "Manufacturing: 12 — мало, бо Lattice — software-focused; hardware-програми Anduril мають власні manufacturing allocations окремо",
+          "Product: 11 · Design: 10 · Cybersecurity: 7 · Legal: 7 · Data/Analytics: 6 · Marketing: 1",
+          "Найцікавіша невідповідність проти SaaS: Program/Project Management майже рівний HR і у 57x більший за Marketing. Defense-компанії не наймають маркетинг — вони наймають PMO.",
+        ],
+        sources: [
+          { label: "Built In Anduril profile", url: "https://builtin.com/company/anduril-industries" },
+          { label: "Anduril executive pay (TechCrunch)", url: "https://techcrunch.com/2024/11/26/anduril-salaries-palmer-luckey-other-execs-how-much-do-they-make/" },
         ],
       },
     ],
@@ -340,6 +379,70 @@ export const OVERVIEW: OverviewSection[] = [
           "Ігнорувати MIL-STD test budget під час fundraising — environmental test campaigns — це шестизначні цифри на платформу.",
         ],
       },
+      {
+        title: "CDRL — 20–40% вашої program-labor піде на документацію",
+        body: [
+          "Contract Data Requirements List (CDRL, подається як DD Form 1423) — це authoritative список data deliverables, який contractor винен government під контрактом: technical data packages, test reports, PMR slides, software documentation, failure analysis reports, configuration audit reports. Кожна line item вказує на Data Item Description (DID) — п'ятицифровий-кодований стандартизаційний документ (напр. DI-SESS-81000 для product drawings, DI-CMAN-81253A для configuration audit reports) з обов'язковим content, format і delivery cadence.",
+          "Найбільш недооцінений факт про CDRL: в практиці CDRL-и drive-ять величезні обсяги engineering-роботи — часто 20–40% program labor йде на production CDRL deliverables, а не на design самого продукту. Недооцінка CDRL-labor — єдина найбільш поширена причина cost overrun у програм малих компаній DoD.",
+          "Org-наслідок: program manager мусить читати КОЖНУ CDRL line item і перекладати її в deliverable ownership, format і schedule. CDRL-delivery schedule треба відстежувати окремим Gantt-ом, паралельним до hardware build schedule. Якщо ваш PM ставиться до CDRL як до 'paperwork, яке ми доробимо в кінці' — ви завалите milestone review.",
+        ],
+        sources: [
+          { label: "CDRL - Wikipedia", url: "https://en.wikipedia.org/wiki/Contract_data_requirements_list" },
+          { label: "CDRL/DID - DAU", url: "https://www.dau.edu/blogs/product-support-contract-data-requirements-list-cdrl" },
+          { label: "CDRL - AcqNotes", url: "https://acqnotes.com/acqnote/careerfields/contract-data-requirements-list-cdrl" },
+        ],
+      },
+      {
+        title: "Configuration Management і PLM — коли CAD перестає бути 'мій файл'",
+        body: [
+          "Weapon systems мають 20–40 річний service life, і їх обслуговують організації, які ніколи не зустрічали оригінальних дизайнерів. Configuration Management (стандарти: EIA-649, MIL-HDBK-61A) — це дисципліна, що робить будь-що з цього можливим. Кожна delivered одиниця повинна бути traceable до as-built configuration record, і кожна engineering change повинна бути записана з повним impact analysis.",
+          "У rigorous CM-середовищі ви не можете змінити released drawing або spec без формального ECR (Engineering Change Request), impact analysis, CCB (Change Control Board) approval, ECO (Engineering Change Order) release і каскадних оновлень BOM, production work instructions, test procedures і training materials. Це повільно порівняно з startup engineering-звичками. Орг мусить прийняти, що як тільки part released to production або delivered — це не особистий файл, а controlled artifact. Це великий культурний шок, що топить багато defense hardware-стартапів, які виросли в agile iterate-fast режимі.",
+          "Домінантні defense PLM-платформи: PTC Windchill (market leader в A&D, DISA-approved cloud environments, DoD IL5 accreditation), Siemens Teamcenter (deep customizability, strong change management), Dassault ENOVIA/3DEXPERIENCE (tightly coupled з CATIA), Aras Innovator (lower TCO). Cloud-native альтернативи — Arena, Upchain, Duro — все частіше adopted defense-стартапами до ~50 осіб.",
+        ],
+        sources: [
+          { label: "Windchill PLM - PTC", url: "https://www.ptc.com/en/products/windchill" },
+          { label: "Windchill vs Teamcenter - CLEVR", url: "https://www.clevr.com/blog/ptc-windchill-vs-teamcenter-which-tool-is-better-for-your-team" },
+        ],
+      },
+      {
+        title: "IV&V — чотири осі незалежності",
+        body: [
+          "Для mission- і safety-critical software (а це включає autonomy, fire control і будь-яку систему, чий provenance може призвести до casualty, mission abort або втрати major platform) DoD-програми часто вимагають Independent Verification & Validation, виконану entity-м, незалежним від розробника. Rationale — confirmation bias і accountability: команда, що написала код, має сильні psychological і financial incentives вірити, що він працює.",
+          "NIST і DoD визначають чотири виміри незалежності IV&V, і всі чотири мають бути задоволені. Це не style guide — це structural constraint на ваш org design.",
+        ],
+        bullets: [
+          "Technical independence — IV&V personnel не залучені в requirements, design або implementation.",
+          "Managerial independence — responsibility сидить в окремому management chain від development.",
+          "Financial independence — IV&V budget owned окремою організацією, тож developer не може starve IV&V, щоб врятувати власний schedule.",
+          "Contractual independence — IV&V виконується на окремому контракті, тож developer не може redirect scope.",
+          "Organizational implication: QA/Test мусить бути organizationally independent від Engineering — reporting-ом до Chief Quality Officer, VP Quality або напряму до CEO, не до VP Engineering. Budget test-команди не може бути line item під program manager-ом, що під schedule pressure. Для критичного software справжньо незалежний IV&V contractor engaged під окремим government-контрактом, який developer не контролює.",
+        ],
+        sources: [
+          { label: "IV&V - NIST Glossary", url: "https://csrc.nist.gov/glossary/term/independent_verification_and_validation" },
+          { label: "IV&V Through the Eyes of DoD - Logapps", url: "https://logapps.com/insights/blog/independent-verification-and-validation-ivv-through-eyes-of-dod/" },
+          { label: "NASA SWE-141 IV&V", url: "https://swehb.nasa.gov/spaces/SWEHBVB/pages/32604595/SWE-141+-+Software+Independent+Verification+and+Validation" },
+        ],
+      },
+      {
+        title: "SCIF, FCL і вартість classified-ready infrastructure",
+        body: [
+          "Contractor не може отримати доступ або зберігати classified information без Facility Clearance (FCL), і не може бути sponsored for FCL без government або cleared-prime sponsor. FCL processing: 3–12 місяців. Key Management Personnel (KMP) — типово CEO, senior executives, FSO — мусять тримати personnel clearances на рівні FCL.",
+          "Фізичні security-фасилітеті тієї ж градації:",
+        ],
+        bullets: [
+          "Controlled Unclassified Area — access-controlled space для CUI / ITAR data; немає classified work. Більшість малих defense-компаній стартують тут.",
+          "Closed Area — approved DCSA для open storage і processing classified material до певного рівня, з GSA-approved locks, access control, alarms і guard force requirements.",
+          "SCIF (Sensitive Compartmented Information Facility) — regulated під ICD/ICS 705. Required для TS/SCI work. Construction специалізована і дорога: RF shielding, TEMPEST considerations, sound attenuation, vault doors, continuous monitoring. Малий SCIF коштує $500k–$2M+ to build і мусить бути accredited перед use.",
+          "Clearance timelines (2025 data): Interim Secret 5–30 днів, full Secret медіана ~138 днів (fastest 90%, range 4–8 місяців), full Top Secret 8–18 місяців. Це означає, що classified-program readiness мусить бути заплановано 12+ місяців до будь-якого classified-контракту award.",
+          "Organizational constraint: FSO репортує для security matters напряму CEO (не через engineering або operations), бо FSO personally accountable перед DCSA і мусить мати authority to halt operations, якщо security violation detected. Це hard structural requirement, не best practice.",
+        ],
+        sources: [
+          { label: "DCSA Facility Clearances", url: "https://www.dcsa.mil/FCL/Maintaining-Personnel-Security-Clearances/" },
+          { label: "SCIF Requirements - VERTEX", url: "https://vertexeng.com/insights/requirements-and-challenges-construction-of-scifs/" },
+          { label: "Security Clearance Timelines 2025", url: "https://gcheck.com/blog/how-long-does-dod-background-check-take/" },
+          { label: "CMMC 2.0 - Exostar", url: "https://www.exostar.com/blog/cmmc-compliance/cmmc-2-0-compliance-101-essential-insights-for-businesses/" },
+        ],
+      },
     ],
   },
   // ──────────────────────────────────────────────────────────────
@@ -441,6 +544,98 @@ export const OVERVIEW: OverviewSection[] = [
         sources: [
           { label: "Brittany Laughlin: Scale Stage 75–150", url: "https://medium.com/startup-maturity/maturity-map-scale-stage-75-150-employees-98532a1e44cf" },
           { label: "Index Ventures: scaling through chaos", url: "https://www.indexventures.com/scaling-through-chaos/people-challenges-by-headcount-stage" },
+        ],
+      },
+      {
+        title: "Composition команди з 20 осіб — конкретні ролі",
+        body: [
+          "Instrumental's hardware team-building guidance вказує, що ефективні hardware-команди стартують з ~5 осіб і стають комфортними при 15–25 у міру того, як продукт наближається до readiness. Для defense UGV-компанії з 20 загальним штатом реалістичний engineering split (приблизно 14–15 інженерів з 20) виглядає так:",
+        ],
+        bullets: [
+          "Systems engineering / systems architect: 1 (часто CTO). Володіє requirements, interfaces і verification plan",
+          "Mechanical design: 2–3. Chassis, suspension, payload interfaces, packaging",
+          "Electrical / power / electronics: 2. Power distribution, motor drive, PCB design",
+          "Embedded / firmware: 1–2. Motor control, sensor drivers, safety interlocks",
+          "Software / autonomy: 2–3. Perception, planning, ROS2, middleware, comms",
+          "Test & integration engineer: 1. Environmental, EMI, field trials, corner cases",
+          "Manufacturing / production engineer: 1. Bridges engineering і production line",
+          "Senior-роль, що мусить існувати Day 1: systems architect (зазвичай CTO на цьому масштабі) і щонайменше один principal/staff engineer на дисципліну, що face-ить замовника на design review. Уникайте 20-person team, де всі на IC-рівні — design reviews і TRRs потребують когось senior enough, щоб робити trade decisions у real time.",
+          "Playing-coach leads vs dedicated managers: при 20 людях кожен discipline lead має бути 70–80% hands-on. Dedicated people managers з нульовим IC-output починають мати сенс близько 30–40 інженерів (~50 загального штату). Промотувати найкращого IC у pure-manager роль занадто рано — один з найпоширеніших failure modes на цьому масштабі.",
+        ],
+        sources: [
+          { label: "Building the Hardware Development Team - Instrumental", url: "https://instrumental.com/build-better-handbook/building-hardware-development-team" },
+        ],
+      },
+      {
+        title: "Anduril compensation — Levels.fyi benchmark",
+        body: [
+          "Defense hardware compensation виросла різко з 2020-го, бо new-space і defense-tech unicorns (Anduril, Shield AI, Saronic, Epirus, Skydio) мусять match-ити або близько підходити до FAANG для рекрутингу software-таланту. Hardware-discipline comp виросла повільніше, але зараз matеріально вище за legacy-prime pay у тих самих геoграфіях.",
+          "Anduril (як high-benchmark reference, Levels.fyi):",
+        ],
+        bullets: [
+          "Software Engineer: $207K (L3) до $517K+ (L7); median ~$268K total comp; Software Engineering Manager до $735K на high end",
+          "Mechanical Engineer: $156K (L3) до $279K+ (L6); median ~$175K; L5 median total ~$250K",
+          "Manufacturing Engineer: $134K–$343K range",
+          "Company-wide median total comp: ~$237K",
+          "vs FAANG: на топі ринку (Anduril, Shield AI senior engineers) software-comp зараз у межах 10–20% від FAANG base+bonus, з equity upside більшим в абсолюті (великі private valuations), але менш ліквідним",
+          "vs legacy primes (Lockheed, RTX, Northrop): defense-tech стартапи платять 20–50% більше за comparable інженерів, особливо у software і autonomy",
+          "vs SaaS стартапи тої ж стадії: кеш-comp порівнянний; equity grants раннього defense часто трохи менші на percentage-базі, бо valuations вищі",
+        ],
+        sources: [
+          { label: "Anduril Software Engineer - Levels.fyi", url: "https://www.levels.fyi/companies/anduril-industries/salaries/software-engineer" },
+          { label: "Anduril Mechanical Engineer - Levels.fyi", url: "https://www.levels.fyi/companies/anduril-industries/salaries/mechanical-engineer" },
+          { label: "Anduril Salaries Overview", url: "https://www.levels.fyi/companies/anduril-industries/salaries" },
+        ],
+      },
+      {
+        title: "Clearance як career asset + non-salary benefits",
+        body: [
+          "Три речі постійно з'являються в accepted offers у defense-стартапах, і чому кандидати обмінюють comp на них:",
+        ],
+        bullets: [
+          "Mission — framed конкретно навколо specific end user (a platoon, a ship, a convoy), не абстрактно. 'Ми робимо autonomy для Marine Corps UGV' бʼє 'ми робимо robotics platform' у 9 з 10 interviews з mission-motivated кандидатами",
+          "Clearance як career asset — active Secret або TS/SCI вартий $20K–$50K/year в perpetuity на open market, і кандидат залишає вашу компанію з ним. Це частково пояснює, чому primes тримають retention незважаючи на нижчу comp",
+          "Job stability — довгі defense program cycles означають менше layoff wave-ів, ніж у consumer tech. Після хвиль 2022–2023 це стало реальним selling point",
+          "Lifetime exemption — багато mission-motivated кандидатів активно ХОЧУТЬ identity 'я працюю у defense'. Цей pull не треба sell-ити — треба просто не відштовхувати",
+          "Equity norms (Index Ventures Series A benchmarks): Lead/Principal engineer, що приходить на Series A, типово отримує ~0.3%–1.0%; senior IC ~0.1%–0.35%; стандартний 4-year vest з 1-year cliff. Все частіше раннього-стадії команди пропонують 7–10 year post-termination exercise windows, щоб прибрати 90-day exercise cliff",
+        ],
+        sources: [
+          { label: "Index Ventures: Series A option grants", url: "https://www.indexventures.com/rewarding-talent/option-grants-at-series-a" },
+          { label: "Holloway: Employee Equity Levels", url: "https://www.holloway.com/g/equity-compensation/sections/typical-employee-equity-levels" },
+          { label: "McKinsey: A&D Tech Talent Shortage", url: "https://www.mckinsey.com/industries/aerospace-and-defense/our-insights/debugging-the-software-talent-gap-in-aerospace-and-defense" },
+        ],
+      },
+      {
+        title: "Interview red flags — хто провалиться у defense environment",
+        body: [
+          "Конкретні сигнали, що кандидат з commercial background struggle-итиме, навіть якщо на папері виглядає чудово. Screen-ити експліцитно на interview — якщо хоча б три з цих сигналів присутні, hire буде unhappy протягом 12 місяців.",
+        ],
+        bullets: [
+          "Visceral негативна реакція на paperwork, configuration control або audits",
+          "Не може назвати жодного MIL-STD або пояснити, чому environmental qualification має значення",
+          "Міряє success тільки в velocity — 'скільки PRs per week' без жодної згадки про verification",
+          "Здивування, що роботу треба виконувати на government-furnished laptop або у cleared room",
+          "Negative або dismissive щодо роботи з uniformed end users",
+          "Foreign-national status без existing green card (створює ITAR-обмеження, які рідко resolvуються вчасно для стартапу)",
+          "'Ex-Google engineer anti-pattern' — не талант, а культура, яка не transfer-иться: (а) infinite-resource assumptions (compute, parts, vendors), (б) A/B-test thinking застосоване до safety-critical hardware, (в) небажання писати documentation для замовника, (г) intolerance до slow feedback loops (hardware iterations — це тижні, не хвилини), (д) discomfort з mission",
+          "Інженери, що transfer-яться добре, майже завжди self-select hard — вони вже motivated mission-ом і свідомо обмінюють comp і velocity на meaning. Screen-ити на це explicitly",
+        ],
+        sources: [
+          { label: "Defense culture clash - Defense News", url: "https://www.defensenews.com/smr/cultural-clash/2019/01/28/it-wasnt-a-fun-place-to-work-dods-cultural-hurdles-in-attracting-tech-talent/" },
+          { label: "Silicon Valley back to roots", url: "https://techcrunch.com/2022/02/05/the-rise-of-defense-tech-is-bringing-silicon-valley-back-to-its-roots/amp" },
+        ],
+      },
+      {
+        title: "Defense buddy pattern і реальний ramp",
+        body: [
+          "Engineer ramp-up у defense hardware суттєво довший за SaaS. General software ramp data показує 3–9 місяців до full productivity. У defense hardware додайте MIL-STD/CDRL learning curve: реалістична оцінка — 6 місяців до першого meaningful технічного contribution, 12 місяців до ownership підсистеми, і до 24 місяців до deep defense-native judgment для інженера, що приходить з commercial background.",
+          "Компанії, які швидко ramp-ять інженерів, застосовують експліцитний патерн: кожен новий hire отримує 'defense buddy' — людину з 10+ роками defense-досвіду, яка пояснює acronyms і norms протягом перших шести місяців. Це не mentor — це translator. Buddy відповідає на питання типу 'що означає DR у цьому контексті?' і 'чому я не можу просто переписати цей документ?'",
+          "Що більшість нових hires з commercial background потребують явного тренінгу: (а) як читати і відповідати на SOW і CDRL list, (б) purpose і структура MIL-STD-810 test plans, (в) як produce-ити DID-compliant deliverable document, (г) configuration management (ECPs, ECRs, ECNs) з real rigor, (д) як behave-итись у customer design review.",
+          "Pre-clearance productivity: покладіть uncleared hires на unclassified work (більшість early-stage UGV engineering — unclassified technical data, що ITAR-controlled, але не classified), segment facilities і networks, щоб uncleared employees могли contribute, і використовуйте pipeline cleared contractors або consultants to cover classified reviews протягом першого року. Interim Secret, яка приходить за 5–30 днів, часто достатня, щоб розблокувати більшість roles.",
+        ],
+        sources: [
+          { label: "Engineer Onboarding Ramp-Up - HackerNoon", url: "https://hackernoon.com/engineer-onboarding-the-ugly-truth-about-ramp-up-time-7e323t9j" },
+          { label: "Interim Security Clearance", url: "https://support.clearancejobs.com/security-clearance-faqs/what-is-an-interim-security-clearance" },
         ],
       },
     ],
