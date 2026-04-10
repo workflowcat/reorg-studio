@@ -1,65 +1,213 @@
-import Image from "next/image";
+import Link from "next/link";
+import {
+  Network,
+  Grid3x3,
+  Layers,
+  ShieldCheck,
+  ArrowRight,
+  Users,
+  Building2,
+} from "lucide-react";
+import { Card, CardBody, CardHeader, CardTitle, Badge } from "@/components/ui/primitives";
+import { PHASES } from "@/lib/default-data";
+import { OVERVIEW } from "@/content/overview";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="mx-auto max-w-7xl px-6 py-10 space-y-14">
+      {/* Hero */}
+      <section className="relative overflow-hidden rounded-2xl border border-zinc-200 bg-white">
+        <div className="bg-grid absolute inset-0 opacity-60" />
+        <div className="relative px-8 py-12 md:py-16 md:px-12 max-w-3xl">
+          <Badge tone="outline" className="mb-4 text-zinc-500">
+            Внутрішній planning-інструмент · v0.1
+          </Badge>
+          <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-zinc-900 leading-[1.1]">
+            Спроєктуй орг-структуру перш ніж наймати під неї.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mt-4 text-sm md:text-base text-zinc-600 leading-relaxed max-w-xl">
+            Planning-канва для малих defense-hardware R&amp;D команд, що
+            ростуть з 20 до 50, до 100+ осіб. Змоделюй структуру, розстав
+            фази росту і перевір на міцність, хто за що відповідає — ще до
+            того, як розпочнеться розмова про реорг.
           </p>
+
+          <div className="mt-7 flex flex-wrap gap-2">
+            <Link
+              href="/org-chart"
+              className="inline-flex items-center gap-2 rounded-md bg-zinc-900 px-4 py-2 text-xs font-medium text-white hover:bg-zinc-800"
+            >
+              <Network className="h-3.5 w-3.5" />
+              Відкрити org chart
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+            <Link
+              href="/raci"
+              className="inline-flex items-center gap-2 rounded-md border border-zinc-300 bg-white px-4 py-2 text-xs font-medium text-zinc-700 hover:bg-zinc-50"
+            >
+              <Grid3x3 className="h-3.5 w-3.5" />
+              Відкрити RACI matrix
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Stats */}
+        <div className="relative grid grid-cols-2 md:grid-cols-4 border-t border-zinc-200">
+          {[
+            { label: "Розмір founding team", value: "20", icon: Users },
+            { label: "Ціль росту", value: "100+", icon: Building2 },
+            { label: "Функціональні блоки", value: "6", icon: Layers },
+            { label: "Незалежний QA", value: "Завжди", icon: ShieldCheck },
+          ].map(({ label, value, icon: Icon }) => (
+            <div
+              key={label}
+              className="px-6 py-5 border-r border-zinc-200 last:border-r-0 bg-white/80"
+            >
+              <div className="flex items-center gap-2 text-[11px] uppercase tracking-wider text-zinc-500">
+                <Icon className="h-3 w-3" />
+                {label}
+              </div>
+              <div className="mt-1 text-2xl font-semibold text-zinc-900 tabular-nums">
+                {value}
+              </div>
+            </div>
+          ))}
         </div>
-      </main>
+      </section>
+
+      {/* Phase roadmap summary */}
+      <section>
+        <div className="flex items-end justify-between mb-5">
+          <div>
+            <h2 className="text-lg font-semibold tracking-tight text-zinc-900">
+              Фази росту
+            </h2>
+            <p className="text-xs text-zinc-500 mt-1">
+              Три staging-точки, де орг-структура мусить суттєво змінитися — не
+              через чисельність заради чисельності, а через речі, що
+              ламаються на кожній межі.
+            </p>
+          </div>
+        </div>
+        <div className="grid gap-4 md:grid-cols-3">
+          {PHASES.map((phase) => (
+            <Card key={phase.id}>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <Badge tone="dark">Фаза {phase.id}</Badge>
+                  <span className="text-xs font-mono text-zinc-500">
+                    {phase.shortLabel} осіб
+                  </span>
+                </div>
+                <CardTitle className="mt-2">{phase.name}</CardTitle>
+              </CardHeader>
+              <CardBody>
+                <p className="text-xs leading-relaxed text-zinc-600">
+                  {phase.description}
+                </p>
+              </CardBody>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* Research topic sections */}
+      {OVERVIEW.map((section) => (
+        <section key={section.id} id={section.id}>
+          <div className="flex items-end justify-between mb-5">
+            <div>
+              <Badge tone="outline" className="mb-2">
+                {section.eyebrow}
+              </Badge>
+              <h2 className="text-lg font-semibold tracking-tight text-zinc-900">
+                {section.title}
+              </h2>
+              <p className="text-xs text-zinc-500 mt-1 max-w-2xl">
+                {section.summary}
+              </p>
+            </div>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            {section.cards.map((c) => (
+              <Card key={c.title}>
+                <CardHeader>
+                  <CardTitle>{c.title}</CardTitle>
+                </CardHeader>
+                <CardBody className="space-y-2 text-xs leading-relaxed text-zinc-600">
+                  {c.body.map((p, i) => (
+                    <p key={i}>{p}</p>
+                  ))}
+                  {c.bullets && c.bullets.length > 0 ? (
+                    <ul className="list-disc list-outside space-y-1 pl-4 text-zinc-600">
+                      {c.bullets.map((b, i) => (
+                        <li key={i}>{b}</li>
+                      ))}
+                    </ul>
+                  ) : null}
+                  {c.sources && c.sources.length > 0 ? (
+                    <div className="pt-2 border-t border-zinc-100 mt-3">
+                      <div className="text-[10px] uppercase tracking-wider text-zinc-400 mb-1">
+                        Джерела
+                      </div>
+                      <ul className="space-y-0.5">
+                        {c.sources.map((s, i) => (
+                          <li key={i}>
+                            {s.url ? (
+                              <a
+                                href={s.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-[10px] text-zinc-500 hover:text-zinc-800 underline decoration-dotted"
+                              >
+                                {s.label}
+                              </a>
+                            ) : (
+                              <span className="text-[10px] text-zinc-500">
+                                {s.label}
+                              </span>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
+                </CardBody>
+              </Card>
+            ))}
+          </div>
+        </section>
+      ))}
+
+      {/* Bottom CTA */}
+      <section className="rounded-2xl border border-zinc-900 bg-zinc-900 text-white px-8 py-10 md:px-12">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div className="max-w-lg">
+            <h3 className="text-lg font-semibold tracking-tight">
+              Готові намалювати орг-структуру?
+            </h3>
+            <p className="mt-2 text-sm text-zinc-300">
+              Усе на цій сторінці редагується. Налаштуй блоки, переставляй
+              людей, переписуй RACI під свою operating model. Ваші зміни
+              лишаються у браузері — нічого не покидає пристрій.
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <Link
+              href="/org-chart"
+              className="inline-flex items-center gap-2 rounded-md bg-white px-4 py-2 text-xs font-medium text-zinc-900 hover:bg-zinc-100"
+            >
+              <Network className="h-3.5 w-3.5" /> Org chart
+            </Link>
+            <Link
+              href="/raci"
+              className="inline-flex items-center gap-2 rounded-md border border-zinc-700 px-4 py-2 text-xs font-medium text-white hover:bg-zinc-800"
+            >
+              <Grid3x3 className="h-3.5 w-3.5" /> RACI
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
