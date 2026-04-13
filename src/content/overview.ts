@@ -311,6 +311,29 @@ export const OVERVIEW: OverviewSection[] = [
           { label: "McKinsey: Reorganization without tears", url: "https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/reorganization-without-tears" },
         ],
       },
+      {
+        title: "Experimental vs production R&D — коли і як розділяти",
+        body: [
+          "При 20 осіб формальний split між 'advanced R&D' і 'production engineering' — передчасний. 10% exploratory на 20 людей = 2 інженери. Це не команда. Exploration на цьому масштабі — temporal (виділені sprint-цикли), а не organizational (окрема група).",
+          "DoD budget розкриває реальне ratio: ~82% йде на production-track R&D (6.4–6.7), ~18% на exploratory (6.1–6.3). Boeing має найчистішу модель: BR&T → TRL 1–4, Phantom Works → TRL 4–6, business units → TRL 7–9. Для малої компанії це мап-иться на time allocation, а не на окремі org.",
+          "Split стає viable десь на 80–120 осіб. Створити малу advanced-dev cell (5–8 осіб), що репортує CEO/CTO, не VP Production. Окремий budget line. Але mandate: та сама software-платформа, hardware-інтерфейси і test-інфраструктура, що й у production team — інакше Conway's Law дасть дві несумісні архітектури, які малій компанії не під силу staffити.",
+        ],
+        bullets: [
+          "~20 осіб: один integrated team. Exploration у тому ж sprint-ритмі.",
+          "~40–60: temporal separation. Виділені 'innovation weeks'. 2–3 інженери з 30–50% protected time. Не створювати окрему групу.",
+          "~80–120: viable split. Advanced dev cell (5–8 осіб), прямий report до CEO/CTO, окремий budget.",
+          "~150+: формалізація. Окремі reporting lines. Launch Team transfer mechanism (Anduril pattern: 30 осіб тренуються в HQ, потім deploy у завод).",
+          "Budget target: 80/20 (production/exploration) на малому масштабі → 70/20/10 (core/adjacent/transformational) після 100 осіб.",
+        ],
+        sources: [
+          { label: "Boeing Phantom Works (Wikipedia)", url: "https://en.wikipedia.org/wiki/Boeing_Phantom_Works" },
+          { label: "Managing Skunk Works (Freaktakes)", url: "https://www.freaktakes.com/p/managing-lockheeds-skunk-works" },
+          { label: "DoD RDT&E FY2022 (NSF/NCSES)", url: "https://ncses.nsf.gov/pubs/nsf25301" },
+          { label: "Anduril Arsenal-1 production (Breaking Defense)", url: "https://breakingdefense.com/2026/03/as-fury-production-starts-anduril-pledging-a-different-production-approach-at-arsenal-1/" },
+          { label: "Valley of Death (AcqIRC)", url: "https://acqirc.org/publications/perspectives/challenges-to-innovation-transition-the-valley-of-death-results-from-more-than-a-lack-of-flexible-funding/" },
+          { label: "Bain A&D R&D Report 2023", url: "https://www.bain.com/insights/aerospace-and-defense-engineering-r-and-d-report-2023/" },
+        ],
+      },
     ],
   },
   // ──────────────────────────────────────────────────────────────
