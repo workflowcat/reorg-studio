@@ -10,7 +10,55 @@ import {
 } from "lucide-react";
 import { Card, CardBody, CardHeader, CardTitle, Badge } from "@/components/ui/primitives";
 import { PHASES } from "@/lib/default-data";
-import { OVERVIEW } from "@/content/overview";
+import { OVERVIEW, type CompanyProfile } from "@/content/overview";
+
+function ProfileCard({ profile: p }: { profile: CompanyProfile }) {
+  return (
+    <div className="rounded-xl border border-zinc-200 bg-white overflow-hidden">
+      <div className="px-4 pt-4 pb-3 border-b border-zinc-100">
+        <div className="text-sm font-semibold text-zinc-900">{p.name}</div>
+        <div className="text-[11px] text-zinc-500 mt-0.5">{p.tagline}</div>
+      </div>
+      <div className="px-4 py-3 grid grid-cols-2 gap-x-4 gap-y-1.5 text-[11px] border-b border-zinc-100">
+        <div><span className="text-zinc-400">Засновано</span> <span className="text-zinc-700 ml-1">{p.founded}</span></div>
+        <div><span className="text-zinc-400">Штат</span> <span className="text-zinc-700 ml-1">{p.headcount}</span></div>
+        <div><span className="text-zinc-400">Eng</span> <span className="text-zinc-700 ml-1">{p.engRatio}</span></div>
+        <div><span className="text-zinc-400">HQ</span> <span className="text-zinc-700 ml-1">{p.hq}</span></div>
+        {p.production && (
+          <div className="col-span-2"><span className="text-zinc-400">Завод</span> <span className="text-zinc-700 ml-1">{p.production}</span></div>
+        )}
+        <div className="col-span-2"><span className="text-zinc-400">Засновники</span> <span className="text-zinc-700 ml-1">{p.founders}</span></div>
+      </div>
+      <div className="px-4 py-3 space-y-2 text-[11px] text-zinc-600 leading-relaxed">
+        <div>
+          <div className="text-[10px] uppercase tracking-wider text-zinc-400 mb-0.5">Ключовий хід</div>
+          {p.keyMove}
+        </div>
+        <div>
+          <div className="text-[10px] uppercase tracking-wider text-zinc-400 mb-0.5">Що копіювати</div>
+          {p.whatToCopy}
+        </div>
+      </div>
+      {p.sources.length > 0 && (
+        <div className="px-4 py-2 border-t border-zinc-100 bg-zinc-50/50">
+          <ul className="flex flex-wrap gap-x-3 gap-y-0.5">
+            {p.sources.map((s, i) => (
+              <li key={i}>
+                {s.url ? (
+                  <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-[10px] text-zinc-400 hover:text-zinc-700 underline decoration-dotted">
+                    {s.label}
+                  </a>
+                ) : (
+                  <span className="text-[10px] text-zinc-400">{s.label}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -128,6 +176,42 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Company profiles — comparison table + cards */}
+          {section.profiles && section.profiles.length > 0 && (
+            <>
+              <div className="overflow-x-auto rounded-xl border border-zinc-200 bg-white mb-4 scrollbar-thin">
+                <table className="w-full min-w-[800px] border-collapse text-[11px]">
+                  <thead>
+                    <tr className="bg-zinc-50 border-b border-zinc-200">
+                      <th className="text-left px-3 py-2 font-semibold text-zinc-900">Компанія</th>
+                      <th className="text-left px-3 py-2 font-medium text-zinc-500">Рік</th>
+                      <th className="text-left px-3 py-2 font-medium text-zinc-500">Штат</th>
+                      <th className="text-left px-3 py-2 font-medium text-zinc-500">Eng %</th>
+                      <th className="text-left px-3 py-2 font-medium text-zinc-500">Ключовий хід</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {section.profiles.map((p) => (
+                      <tr key={p.name} className="border-b border-zinc-100 hover:bg-zinc-50/60">
+                        <td className="px-3 py-2 font-semibold text-zinc-900">{p.name}</td>
+                        <td className="px-3 py-2 text-zinc-600 tabular-nums">{p.founded}</td>
+                        <td className="px-3 py-2 text-zinc-600">{p.headcount}</td>
+                        <td className="px-3 py-2 text-zinc-600">{p.engRatio}</td>
+                        <td className="px-3 py-2 text-zinc-600">{p.tagline}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3 mb-6">
+                {section.profiles.map((p) => (
+                  <ProfileCard key={p.name} profile={p} />
+                ))}
+              </div>
+            </>
+          )}
+
+          {/* Regular content cards */}
           <div className="grid gap-4 md:grid-cols-2">
             {section.cards.map((c) => (
               <Card key={c.title}>
@@ -179,7 +263,7 @@ export default function Home() {
         </section>
       ))}
 
-      {/* Bottom CTA */}
+      {/* ── Bottom CTA ── */}
       <section className="rounded-2xl border border-zinc-900 bg-zinc-900 text-white px-8 py-10 md:px-12">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div className="max-w-lg">

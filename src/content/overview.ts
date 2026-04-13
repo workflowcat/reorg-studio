@@ -17,6 +17,20 @@
 
 export type OverviewSource = { label: string; url?: string };
 
+export type CompanyProfile = {
+  name: string;
+  tagline: string;
+  founded: number;
+  headcount: string;
+  engRatio: string;
+  founders: string;
+  hq: string;
+  production?: string;
+  keyMove: string;
+  whatToCopy: string;
+  sources: OverviewSource[];
+};
+
 export type OverviewCard = {
   title: string;
   body: string[];
@@ -29,6 +43,7 @@ export type OverviewSection = {
   eyebrow: string;
   title: string;
   summary: string;
+  profiles?: CompanyProfile[];
   cards: OverviewCard[];
 };
 
@@ -37,138 +52,166 @@ export const OVERVIEW: OverviewSection[] = [
   {
     id: "benchmarks",
     eyebrow: "Benchmarks",
-    title: "Як насправді організовані співставні defense-hardware компанії",
+    title: "Як насправді організовані ці компанії",
     summary:
-      "Реальні компанії, що проходять перехід 20 → 100 осіб, не виглядають як акуратна схема з підручника. Anduril, Shield AI, Saronic, Skydio, Epirus, Hadrian і Helsing зрештою приходять до схожої форми — але роблять дуже різні вибори щодо того, коли розділяти функції, де розмістити quality та як інтерфейситися з державним замовником.",
-    cards: [
+      "Сім компаній, що пройшли або проходять шлях 20 → 100+. Усі зрештою зійшлися до схожої форми, але обрали дуже різні шляхи.",
+    profiles: [
       {
-        title: "Anduril — software-first, розділена engineering-організація",
-        body: [
-          "Anduril (заснована 2017) — це еталонний приклад. Її п'ятеро засновників свідомо стартували з software-centric композиції — Palmer Luckey, Trae Stephens, Brian Schimpf (ex-Palantir director of engineering), Joe Chen (ex-Oculus hardware lead) і Matt Grimm (COO) — і побудували Lattice OS ще до hardware-платформ, а потім наростили навколо нього Ghost Shark, Fury, Roadrunner і Sentry.",
-          "При ~6 200 працівниках станом на кінець 2025, engineering становить приблизно 42% штату. Структурна деталь, яку варто копіювати: дві окремі SVP-ролі — SVP Engineering (~413 прямих/непрямих підлеглих) і SVP Programs & Engineering (~122) — що свідомо розділяють core engineering від engineering, прив'язаного до customer-програм. Це модель IPT з силіконово-долинним лейблом.",
-          "Історія виробництва не менш повчальна. Arsenal-1 в Огайо — це перший виділений виробничий майданчик Anduril, але перші 25 production leads — 'Fury Launch Team' — місяцями тренувалися в Costa Mesa разом з R&D-командою перед деплоєм. Саме цю фазу спільного навчання пропускає більшість провалених hardware-стартапів.",
-        ],
+        name: "Anduril",
+        tagline: "Софт спочатку, залізо потім",
+        founded: 2017,
+        headcount: "~6 200 (кін. 2025)",
+        engRatio: "42%",
+        founders: "5 — тільки один з hardware (Joe Chen, ex-Oculus)",
+        hq: "Costa Mesa, CA",
+        production: "Arsenal-1, Ohio",
+        keyMove: "Lattice OS побудували до першої hardware-платформи. Кожна наступна програма — Ghost Shark, Fury, Roadrunner — амортизує одну software-інвестицію.",
+        whatToCopy: "Дві окремі SVP-ролі: SVP Engineering (core, ~413 осіб) vs SVP Programs & Engineering (customer-aligned, ~122). IPT з SV-лейблом.",
         sources: [
           { label: "Anduril Leadership", url: "https://www.anduril.com/anduril-leadership" },
-          { label: "Arsenal-1 announcement", url: "https://www.anduril.com/news/anduril-building-arsenal-1-hyperscale-manufacturing-facility-in-ohio" },
-          { label: "Contrary Research deep dive", url: "https://research.contrary.com/company/anduril" },
-          { label: "HR Grapevine: +1000 hires in 9 months", url: "https://www.hrgrapevine.com/us/content/article/2024-09-09-defense-tech-start-up-anduril-hires-over-1000-employees-in-9-months-how-fast-is-too-fast" },
+          { label: "Arsenal-1", url: "https://www.anduril.com/news/anduril-building-arsenal-1-hyperscale-manufacturing-facility-in-ohio" },
+          { label: "Contrary Research", url: "https://research.contrary.com/company/anduril" },
         ],
       },
       {
-        title: "Shield AI — купити виробниче плече",
-        body: [
-          "Shield AI (заснована 2015) проходила відстежувану референс-криву: <30 осіб наприкінці 2017 → ~150 до 2020 → ~900 на квітень 2025 → ~1 319 на початок 2026. Засновники покривають три осі — CEO Ryan Tseng (consumer hardware, попередній exit у wireless-charging у Qualcomm), President Brandon Tseng (ex-Navy SEAL + HBS MBA) і CTO Andrew Reiter (computer vision, Draper Labs). Патерн — один засновник на кожну вісь — повторюється у всіх miltech-компаніях з цієї вибірки.",
-          "Найбільший структурний урок: Shield AI нарощував hardware-плече через придбання Martin UAV у 2021, а не намагався органічно підняти виробництво V-BAT. Вона успадкувала 107k-sqft 'Batcave' у Далласі разом з наявною командою виробництва. Ко-локація дизайну, engineering і виробництва на цьому майданчику — свідомий вибір. VP Manas Menon (Production & Supply Chain): 'На ранньому етапі нас було 15 в одній кімнаті, які намагалися зібрати п'ять квадрокоптерів. Зараз ми виробляємо Group 3 aircraft і робимо їх сотнями щороку.'",
-          "Також варто відзначити: Chirag Shah тримає комбінований титул Chief Product and Engineering Officer. Тримати product strategy всередині engineering замість того, щоб створювати антагоністичний product/eng split — це свідомий структурний вибір.",
-        ],
+        name: "Shield AI",
+        tagline: "Купити виробниче плече, не будувати",
+        founded: 2015,
+        headcount: "~1 300 (поч. 2026)",
+        engRatio: "—",
+        founders: "3 осі: consumer HW · ex-SEAL · CV/research",
+        hq: "San Diego, CA",
+        production: "Batcave, Dallas (107k → 200k sqft)",
+        keyMove: "Придбали Martin UAV у 2021 замість піднімання виробництва V-BAT з нуля. Успадкували команду + facilities.",
+        whatToCopy: "CPEO (Chief Product & Engineering Officer) — product strategy всередині engineering, а не антагоністичний split.",
         sources: [
           { label: "Shield AI Batcave", url: "https://shield.ai/its-all-systems-go-at-shield-ais-texas-unified-facility/" },
-          { label: "Shield AI team", url: "https://shield.ai/our-team/" },
-          { label: "Contrary Research Shield AI", url: "https://research.contrary.com/company/shield-ai" },
-          { label: "Fortune on Shield AI inflection", url: "https://fortune.com/2025/12/21/shield-ai-ukraine-defense-tech-gary-steele/" },
+          { label: "Contrary Research", url: "https://research.contrary.com/company/shield-ai" },
         ],
       },
       {
-        title: "Saronic — найближча крива до старту з 20 осіб",
-        body: [
-          "Saronic має найближчу криву зростання до того, з чим зіткнеться нова UGV-компанія. Заснована 2022; ~271 працівник наприкінці 2024, ~404 до червня 2025, ~471 до липня 2025, ~1 300+ на початку 2026. Арк 20 → 100 → 500 відбувся приблизно за 18 місяців.",
-          "Її виконавчий розподіл на двох засновників варто вивчити: Dino Mavrookas (CEO) — Navy SEAL з одинадцятьма роками служби і вісьмома бойовими турами. Doug Lambert (COO) володіє R&D, engineering і виробництвом — сидить між потребами замовника і виробничими таймлайнами. Vibhav Altekar (CTO, ко-засновник) керує Forward Deployed Engineering, Product, Special Programs і Software у сферах perception, navigation, ML, C2 і systems integration.",
-          "Незвичайні структурні сигнали: CTO володіє організацією 'Forward Deployed Engineering' з першого дня — модель FDE від Palantir, імпортована в hardware-компанію. Окрема функція 'Defense Growth' (на чолі з Nick Stoner) перетворює R&D-спроможності на фінансовані program of record; вона явно відокремлена і від engineering, і від загальної BD. Географія віддзеркалює функцію: Austin (HQ/engineering), New Orleans (naval architects, marine engineers, systems testing — все ко-локовано).",
-        ],
+        name: "Saronic",
+        tagline: "Від 20 до 500 за 18 місяців",
+        founded: 2022,
+        headcount: "~1 300+ (поч. 2026)",
+        engRatio: "—",
+        founders: "CEO Navy SEAL (Mavrookas) · CTO autonomy (Altekar)",
+        hq: "Austin, TX",
+        production: "New Orleans",
+        keyMove: "CTO володіє Forward Deployed Engineering як named org з Day 1 — Palantir FDE model у hardware. Окрема функція Defense Growth живе поза eng і BD.",
+        whatToCopy: "Географія = функція: engineering в Austin, production + testing в New Orleans.",
         sources: [
           { label: "Saronic Team", url: "https://www.saronic.com/team" },
           { label: "Saronic Louisiana expansion", url: "https://insideunmannedsystems.com/saronic-raises-1-75b-expands-louisiana-shipbuilding-footprint-as-autonomous-surface-vessel-production-scales/" },
-          { label: "Pragmatic Engineer on FDEs", url: "https://newsletter.pragmaticengineer.com/p/forward-deployed-engineers" },
         ],
       },
       {
-        title: "Структурна форма, до якої вони сходяться",
-        body: [
-          "Крізь Anduril, Shield AI, Saronic, Skydio, Epirus, Hadrian і Helsing постійно з'являється одна й та сама форма: трикутник засновників, що покриває mission/government-авторитет, systems-level engineering і operations/виробництво; непропорційно великий engineering-блок; і виробнича функція, що починає життя тісно зчепленою з R&D і відокремлюється лише тоді, коли обсяги змушують.",
-          "Співвідношення 'інженери до не-інженерів', на яке можна планувати:",
-        ],
-        bullets: [
-          "При ~20 осіб: 70–80% інженерів",
-          "При ~50 осіб: ~60% інженерів, з'являється перший виділений Program Manager, Head of QA імпортується з праймa або SpaceX",
-          "При ~100 осіб: 40–50% інженерів, декілька названих Program Managers, Forward Deployed Engineering стає названою дисципліною, виділені capture/proposal writers, перший in-house General Counsel",
-          "Autonomy/AI завжди виокремлюється як окрема дисципліна від embedded/software — вона research-heavy і працює в іншому ритмі",
-          "DC (або DC-area) офіс з'являється непропорційно рано в кожної компанії з цього списку, бо інтерфейс до держави цього вимагає",
-        ],
-        sources: [
-          { label: "Contrary Research Helsing", url: "https://research.contrary.com/company/helsing" },
-          { label: "Contrary Research Epirus", url: "https://research.contrary.com/company/epirus" },
-          { label: "Bolt on hardware team building", url: "https://blog.bolt.io/the-complete-guide-to-building-hardware-startup-teams-part-3-management-scale-95bd856e14f5" },
-          { label: "Skydio exec announcements", url: "https://medium.com/skydio/autonomous-drone-maker-skydio-adds-key-product-and-engineering-executives-to-growing-team-1968647c0fc9" },
-        ],
-      },
-      {
-        title: "Де насправді живе quality",
-        body: [
-          "У всіх семи досліджених компаніях є послідовний патерн, який правильно розв'язує питання QA:",
-          "Integration & Test живе всередині Engineering (не Manufacturing). Це частина R&D-сторони — Anduril, Shield AI і Skydio всі підтверджують це у публічній орг-структурі. Production Quality живе всередині Manufacturing/Operations. VP Production & Supply Chain у Shield AI володіє production quality; Head of Quality у Hadrian (ex-SpaceX) вбудований у завод.",
-          "Розділення між ними зазвичай відбувається на позначці 50–80 осіб, коли компанія переходить від 'один прототип за раз' до low-rate initial production. Нижче цього достатньо одного quality-інженера з незалежним шляхом ескалації.",
-          "Патерн senior-імпорту в Hadrian вартує уваги: вони найняли quality-лідерство безпосередньо зі SpaceX, а не ростили його внутрішньо. Імпорт досвідченого quality-лідера дешевший і швидший, ніж спроба будувати функцію органічно.",
-        ],
-        sources: [
-          { label: "Breaking Defense on Hadrian", url: "https://breakingdefense.com/2024/08/how-startup-hadrian-plans-to-take-over-the-defense-manufacturing-world/" },
-          { label: "TechCrunch on Hadrian", url: "https://techcrunch.com/2024/02/21/hadrian-automations-ceo-wants-to-defy-history-and-revitalize-american-industry/" },
-        ],
-      },
-      {
-        title: "Контрінтуїтивні структурні вибори, що спрацювали",
-        body: [
-          "Декілька виборів з бенчмарк-набору, які на папері виглядають дивно, але спрацювали на практиці:",
-        ],
-        bullets: [
-          "Software-first hardware-філософія Anduril — побудова Lattice OS ще до будь-якої платформи, щоб наступні hardware-програми амортизували одну software-інвестицію.",
-          "Shield AI придбав Martin UAV заради готового виробничого плеча замість того, щоб піднімати його з нуля — це врятувало їх від пастки 'перший раз масштабуємо виробництво'.",
-          "Epirus агресивно наймає з Raytheon — трейд-оф у тому, що виконання повільніше (плато на ~240), але є глибокий defense domain knowledge. Правильна відповідь, якщо твій замовник домінує в program-of-record процесах.",
-          "Hadrian парує software-інженерів 1:1 з операторами shop-floor і трактує quality-лідерство як senior-імпорт зі SpaceX.",
-          "Advisory boards як замінник in-house DoD-експертизи до ~100 осіб (Skydio's National Security Advisory Board, Strategic Advisory Board у Epirus).",
-          "Концентрація BD/capture у DC, а engineering у talent hubs — кожна benchmarked-компанія має DC-footprint, непропорційний до загального розміру.",
-        ],
-        sources: [
-          { label: "Ghost Shark: prototype to fleet in 3 years", url: "https://www.anduril.com/news/ghost-shark-enters-program-of-record-from-prototype-to-fleet-in-three-years" },
-          { label: "Skydio National Security Advisory Board", url: "https://www.skydio.com/blog/skydio-announces-new-national-security-advisory-board-with-leading-experts-in-national-security-and" },
-        ],
-      },
-      {
-        title: "Skydio, Epirus, Hadrian, Helsing — чотири різні архетипи",
-        body: [
-          "Для повноти картини, чотири менш обговорюваних компанії з benchmark-вибірки, кожна з яких ілюструє окремий архетип масштабування.",
-          "Skydio зробила dual-use перехід — consumer/enterprise prosumer → ~50%+ defense — з видимою organizational-сигнатурою. Named discipline leads з широкими spans: Hayk Martiros керує Autonomy як VP з ~50 researchers. Geographic engineering-стратегія: San Mateo HQ (autonomy core), Boston (MIT talent), Zürich (новий 2026 R&D office для multi-vehicle coordination у GPS-denied nav). Патерн 'pull talent to talent hubs, не форсувати relocation' повторюється у всіх цих компаніях.",
-          "Epirus (заснована 2018) — найбільш 'defense-native': плато на ~240 осіб до початку 2026, CTO Matt Markel — ex-Raytheon radar engineer. ~150 осіб у Torrance HQ (100k+ sqft) 'spanning multiple Engineering disciplines and Business Development units' — R&D + BD живуть разом. Explicit separation: 'Engineering disciplines' vs 'BD'. Вони свідомо нарощували domain expertise через наймання з Raytheon і пішли на повільніший growth curve як tradeoff.",
-          "Hadrian (заснована 2021) — найчистіший приклад manufacturing-as-a-product мислення. CEO Chris Power: 'Наша філософія — парувати software engineers з людьми, які реально знають, що роблять. Ми керуємо заводом — там немає місця для bullshit software.' Head of quality — Matthew Mueller, ex-SpaceX senior manufacturing. Імпорт senior quality-лідерства з SpaceX/Lockheed, а не органічне вирощування — це дуже поширений патерн у цій вибірці.",
-          "Helsing (заснована 2021) — 500 працівників у Німеччині, Франції, UK до 2024. Засновники покривають три осі: Gundbert Scherf (German MoD veteran), Niklas Köhler (AI research), Torsten Reil (repeat entrepreneur). Той самий 'one founder per axis' патерн, що у Shield AI. Незвичайний масштабний вибір: expansion через юрисдикції (Естонія, UK, Франція), а не через нові продукти. €70M Естонський майданчик включає production — R&D і production розділені географічно, але під однією legal/program структурою.",
-        ],
+        name: "Skydio",
+        tagline: "Dual-use: consumer → defense",
+        founded: 2014,
+        headcount: "~1 000",
+        engRatio: "—",
+        founders: "3 MIT robotics co-founders",
+        hq: "San Mateo, CA",
+        keyMove: "Перейшли з prosumer дронів у ~50%+ defense revenue. Geographic talent hubs: HQ (autonomy), Boston (MIT), Zürich (multi-vehicle GPS-denied).",
+        whatToCopy: "National Security Advisory Board замінює in-house DoD-експертизу до ~100 осіб.",
         sources: [
           { label: "Skydio Zürich R&D", url: "https://dronexl.co/2026/04/06/skydio-zurich-rd-office-autonomous-drone/" },
-          { label: "Epirus HQ expansion", url: "https://www.epirusinc.com/press-releases/epirus-is-expanding-high-tech-company-opens-new-corporate-headquarters-in-torrance-california" },
-          { label: "Contrary Research Epirus", url: "https://research.contrary.com/company/epirus" },
-          { label: "Breaking Defense on Hadrian", url: "https://breakingdefense.com/2024/08/how-startup-hadrian-plans-to-take-over-the-defense-manufacturing-world/" },
-          { label: "Helsing Series D", url: "https://techfundingnews.com/helsing-raises-600m-series-d-european-defence/" },
-          { label: "Contrary Research Helsing", url: "https://research.contrary.com/company/helsing" },
+          { label: "NSAB", url: "https://www.skydio.com/blog/skydio-announces-new-national-security-advisory-board-with-leading-experts-in-national-security-and" },
         ],
       },
       {
-        title: "Anduril Lattice team breakdown — конкретні пропорції",
+        name: "Epirus",
+        tagline: "Найбільш defense-native з нових",
+        founded: 2018,
+        headcount: "~240 (плато)",
+        engRatio: "—",
+        founders: "CTO ex-Raytheon (Markel), команда heavy on Raytheon alumni",
+        hq: "Torrance, CA",
+        keyMove: "Свідомо наймали з Raytheon. Повільніший growth curve, зате глибокий domain knowledge. Якщо замовник — program-of-record процеси, це правильна відповідь.",
+        whatToCopy: "R&D + BD ко-локовані, але організаційно розділені — explicit boundary.",
+        sources: [
+          { label: "Epirus HQ", url: "https://www.epirusinc.com/press-releases/epirus-is-expanding-high-tech-company-opens-new-corporate-headquarters-in-torrance-california" },
+          { label: "Contrary Research", url: "https://research.contrary.com/company/epirus" },
+        ],
+      },
+      {
+        name: "Hadrian",
+        tagline: "Manufacturing-as-a-product",
+        founded: 2021,
+        headcount: "—",
+        engRatio: "—",
+        founders: "CEO Chris Power",
+        hq: "Torrance, CA",
+        production: "Власний завод — core business",
+        keyMove: "SW engineers парують 1:1 з операторами shop-floor. Head of quality (Mueller) — ex-SpaceX. Quality leadership — senior import, не organic growth.",
+        whatToCopy: "'Ми керуємо заводом — немає місця для bullshit software.'",
+        sources: [
+          { label: "Breaking Defense", url: "https://breakingdefense.com/2024/08/how-startup-hadrian-plans-to-take-over-the-defense-manufacturing-world/" },
+          { label: "TechCrunch", url: "https://techcrunch.com/2024/02/21/hadrian-automations-ceo-wants-to-defy-history-and-revitalize-american-industry/" },
+        ],
+      },
+      {
+        name: "Helsing",
+        tagline: "Expansion через юрисдикції",
+        founded: 2021,
+        headcount: "~500 (2024)",
+        engRatio: "—",
+        founders: "3 осі: MoD veteran · AI research · repeat entrepreneur",
+        hq: "Munich",
+        production: "Estonia (€70M facility)",
+        keyMove: "Масштабуються через країни (Естонія, UK, Франція), а не через нові продукти. R&D і production розділені географічно, під одним legal umbrella.",
+        whatToCopy: "One founder per axis — той самий патерн, що Shield AI і Saronic.",
+        sources: [
+          { label: "Helsing Series D", url: "https://techfundingnews.com/helsing-raises-600m-series-d-european-defence/" },
+          { label: "Contrary Research", url: "https://research.contrary.com/company/helsing" },
+        ],
+      },
+    ],
+    cards: [
+      {
+        title: "Що помітно, коли дивишся на всіх разом",
         body: [
-          "Найкращий публічний datapoint для планування ratio функцій — Anduril's Lattice Solutions team breakdown, опублікований на Built In. При загальному штаті ~6 200 осіб (2 590 інженерів, ~42%), окрема Lattice-команда розподіляється так:",
+          "Одна форма з'являється раз за разом: трикутник засновників (mission + engineering + ops), непропорційно великий eng-блок, і виробнича функція, зчеплена з R&D доки обсяги не змусять розділити.",
+          "Eng-ratio по фазах, на яке можна орієнтуватися:",
         ],
         bullets: [
-          "Engineering: 99+ — найбільша категорія",
-          "Operations / Support: 99+ — практично рівна engineering",
-          "HR / Recruiting: 57 — рекрутинг в defense потребує cleared-специфічних воркфлоу, звідси розмір",
-          "Program / Project Management: 57 — майже рівно з HR. У SaaS PMO зазвичай у 3–5x менше",
-          "Finance: 19 · Customer Success: 17 · AI/ML: 13 · Sales: 13",
-          "Manufacturing: 12 — мало, бо Lattice — software-focused; hardware-програми Anduril мають власні manufacturing allocations окремо",
-          "Product: 11 · Design: 10 · Cybersecurity: 7 · Legal: 7 · Data/Analytics: 6 · Marketing: 1",
-          "Найцікавіша невідповідність проти SaaS: Program/Project Management майже рівний HR і у 57x більший за Marketing. Defense-компанії не наймають маркетинг — вони наймають PMO.",
+          "~20 осіб → 70–80% інженерів. Решта ролей суміщені.",
+          "~50 осіб → ~60%. З'являється PM, Head of QA (import з прайма або SpaceX), recruiter.",
+          "~100+ осіб → 40–50%. PMO, capture writers, GC, security stack.",
+          "Autonomy/AI виокремлюється від embedded/software у всіх вибірках — ритм інший.",
+          "DC-офіс з'являється рано. Інтерфейс до держави вимагає.",
         ],
         sources: [
-          { label: "Built In Anduril profile", url: "https://builtin.com/company/anduril-industries" },
-          { label: "Anduril executive pay (TechCrunch)", url: "https://techcrunch.com/2024/11/26/anduril-salaries-palmer-luckey-other-execs-how-much-do-they-make/" },
+          { label: "Bolt: hardware teams", url: "https://blog.bolt.io/the-complete-guide-to-building-hardware-startup-teams-part-3-management-scale-95bd856e14f5" },
+        ],
+      },
+      {
+        title: "Де живе quality — два різні місця",
+        body: [
+          "Integration & Test — частина Engineering. Production Quality — частина Manufacturing/Operations. Це два різні quality, і вони розходяться десь на 50–80 осіб, коли починається LRIP.",
+          "До цього — один quality engineer з пунктирною лінією до CEO.",
+          "Quality leadership — senior import. Hadrian найняли з SpaceX. Дешевше і швидше, ніж будувати з нуля.",
+        ],
+        sources: [
+          { label: "Breaking Defense: Hadrian", url: "https://breakingdefense.com/2024/08/how-startup-hadrian-plans-to-take-over-the-defense-manufacturing-world/" },
+        ],
+      },
+      {
+        title: "Lattice team breakdown — функції по числах",
+        body: [
+          "Найкращий публічний datapoint. Anduril Lattice Solutions (Built In):",
+        ],
+        bullets: [
+          "Engineering: 99+ · Operations/Support: 99+ — практично рівні",
+          "HR/Recruiting: 57 · Program/PM: 57 — теж рівні. У SaaS PMO у 3–5x менше.",
+          "Finance: 19 · Customer Success: 17 · AI/ML: 13 · Sales: 13",
+          "Manufacturing: 12 (Lattice — software; hardware programs окремо)",
+          "Product: 11 · Design: 10 · Cybersecurity: 7 · Legal: 7 · Marketing: 1",
+          "PMO ≈ HR і у 57x більший за Marketing. Defense наймає PMO, не маркетинг.",
+        ],
+        sources: [
+          { label: "Built In: Anduril", url: "https://builtin.com/company/anduril-industries" },
         ],
       },
     ],
@@ -177,16 +220,16 @@ export const OVERVIEW: OverviewSection[] = [
   {
     id: "theory",
     eyebrow: "Org design theory",
-    title: "Фреймворки, які застосовуються (і ті, що ні)",
+    title: "Які фреймворки працюють, а які ні",
     summary:
-      "Defense hardware — це незвичайна суміш аерокосмічної дисципліни і стартап-швидкості. Фреймворки, які переносяться чисто, в основному походять з аерокосмосу і systems engineering — не з SaaS org design. Ось ті, які справді варто застосовувати.",
+      "Половина org-design фреймворків зі SaaS тут не працює. Ті, що переносяться, в основному з аерокосмосу і systems engineering.",
     cards: [
       {
-        title: "Гібрид functional-matrix і його походження",
+        title: "Functional-matrix гібрид",
         body: [
-          "Functional-matrix гібрид поєднує дві осі організації одночасно. Функціональні вертикалі — механіка, електроніка, embedded, autonomy, виробництво, quality, test — володіють технічною досконалістю, кар'єрним ростом, стандартами і tooling. Крос-функціональні продуктові команди, складені з цих вертикалей, володіють доставкою конкретної платформи або програми. Інженери мають домівку у функціональному департаменті, але деплояться в одну або кілька продуктових команд.",
-          "Патерн бере початок від Skunk Works у Lockheed, заснованого 1943 року під керівництвом Kelly Johnson для побудови XP-80. Lockheed витягнув найкращих інженерів і механіків з функціональної організації і вбудував їх у малу крос-функціональну команду, що володіла усім апаратом end-to-end — сильна матриця ще до того, як це слово існувало. Та команда створила U-2, SR-71, F-117, F-22 і F-35.",
-          "Defense-індустрія стандартизувалася на матриці, бо hardware-програми потребують двох речей одночасно, яких не може дати ані суто функціональна, ані суто проєктна організація: глибокої domain-експертизи (аеродинаміка, RF, термо, структурна механіка), що вимагає довгостроку в спеціалізованих спільнотах; і щільної крос-domain інтеграції навколо одного апарата з вимогливими обмеженнями щодо графіку, вартості і performance.",
+          "Дві осі одночасно. Вертикалі (механіка, електроніка, embedded, autonomy, quality) володіють стандартами і кар'єрним ростом. Горизонтальні продуктові команди — доставкою конкретної платформи. Інженер має домівку у функції, але працює в одній-двох продуктових командах.",
+          "Патерн від Skunk Works (Lockheed, 1943). Kelly Johnson витяг кращих інженерів з функціональної орги і зліпив крос-функціональну команду, що володіла апаратом end-to-end. U-2, SR-71, F-117, F-22 — все звідти.",
+          "Чому матриця стала дефолтом: hardware-програми одночасно потребують глибокої domain-експертизи (аеродинаміка, RF, структурна механіка) і щільної крос-domain інтеграції. Ні чиста функціональна, ні чиста проєктна орга не дає обох.",
         ],
         sources: [
           { label: "Lockheed Martin: Skunk Works origin", url: "https://www.lockheedmartin.com/en-us/who-we-are/business-areas/aeronautics/skunkworks/skunk-works-origin-story.html" },
@@ -216,11 +259,11 @@ export const OVERVIEW: OverviewSection[] = [
         ],
       },
       {
-        title: "Conway's Law і inverse Conway maneuver",
+        title: "Conway's Law",
         body: [
-          "Conway's Law (1968): 'Організації, які проєктують системи, змушені видавати проєкти, що копіюють структуру комунікацій цих організацій.' У defense hardware це проявляється брутально — якщо ви розділите embedded і механіку на окремі вежі, що зустрічаються лише на review gates, ваш продукт матиме чистий mechanical-electronic інтерфейс і жахливу кабельну мережу.",
-          "Inverse Conway maneuver — це свідомо організуватися навколо продукту, який ви хочете, а не дисциплін, які у вас є. Team Topologies (Matthew Skelton і Manuel Pais) формалізує це чотирма типами команд — stream-aligned teams володіють потоком доставки, platform teams знижують когнітивне навантаження на stream-aligned teams, enabling teams проштовхують спроможності крізь команди, а complicated-subsystem teams володіють компонентами глибокої спеціалізації. IPT — це аерокосмічна версія stream-aligned teams.",
-          "Практично: якщо ви хочете продукт з чистими platform-embedded-comms межами, ваша орг-структура повинна мати команди, що мапляться на ці межі. Якщо ви хочете продукт з агресивною інтеграцією крізь ці межі, вам потрібні крос-дисциплінарні команди, які живуть разом і шипляться разом.",
+          "'Організації видають проєкти, що копіюють їхню структуру комунікацій.' У hardware це проявляється жорстко: розділіть embedded і механіку на вежі — отримаєте чистий mechanical-electronic interface і жахливий кабельний жгут.",
+          "Inverse Conway maneuver — організуватися навколо продукту, а не дисциплін. Team Topologies формалізує це: stream-aligned teams (доставка), platform teams (інфраструктура), enabling teams (capabilities), complicated-subsystem teams (глибока спеціалізація). IPT — аерокосмічна версія stream-aligned.",
+          "Якщо хочеш інтеграцію крізь межі — крос-дисциплінарна команда, що живе разом. Якщо хочеш чисті interfaces — команди, що мапляться на ці interfaces.",
         ],
         sources: [
           { label: "Conway's Law (original essay)", url: "https://www.melconway.com/Home/Conways_Law.html" },
@@ -274,9 +317,9 @@ export const OVERVIEW: OverviewSection[] = [
   {
     id: "compliance",
     eyebrow: "Defense compliance",
-    title: "Compliance-підлога, що формує вашу орг-структуру",
+    title: "Compliance визначає форму орга",
     summary:
-      "Defense compliance — це не опція і не щось, що можна відокремити. Він визначає, куди йде штат, хто може бути в якій кімнаті, чому деякі функції мусять бути організаційно незалежними і скільки часу треба, щоб довести нового інженера до продуктивного output. Планувати орг без планування compliance-footprint — це причина, з якої більшість first-time defense-стартапів пропускають перший acceptance milestone.",
+      "Compliance — не опціональний шар. Він визначає, хто може бути в якій кімнаті, які функції мусять бути незалежними, і скільки місяців до ramp-у нового інженера.",
     cards: [
       {
         title: "Стандарти якості: ISO 9001 → AS9100",
@@ -329,11 +372,11 @@ export const OVERVIEW: OverviewSection[] = [
         ],
       },
       {
-        title: "Export control — ITAR, EAR, Wassenaar",
+        title: "ITAR / EAR — export control",
         body: [
-          "Export control — це не опція, і штрафи кримінальні. Майже кожен UGV, autonomy stack і radio system або ITAR-controlled (State Department, 22 CFR parts 120–130), або EAR-controlled (Commerce Department). Це регулює не лише те, хто може отримати експорт, а й хто може торкатися дизайну — 'deemed exports' покривають доступ до technical data з боку foreign persons навіть всередині США.",
-          "Прямі наслідки для найму: non-US persons можуть бути обмежені від певних technical data, якщо ви не тримаєте для них export license. Саме тому defense-hardware орги зазвичай мають Empowered Official — названу US-person з юридичною повноваженням робити export determinations — і Facility Security Officer (FSO), який сидить незалежно від HR і engineering і репортує безпосередньо CEO.",
-          "Штрафи серйозні: ITAR violations можуть сягати $1 млн за порушення і 20 років ув'язнення. Це та функція, де 'розберемося пізніше' — найдорожча з можливих стратегій.",
+          "Майже кожен UGV, autonomy stack і radio system — або ITAR (State Department), або EAR (Commerce). Це регулює не тільки експорт, а й хто може торкатися дизайну — 'deemed exports' покривають доступ до technical data foreign persons навіть всередині США.",
+          "Прямий наслідок: non-US persons обмежені від ITAR technical data без export license. Тому потрібен Empowered Official (US-person з повноваженнями робити export determinations) і FSO, що репортує CEO, а не HR.",
+          "Штрафи: до $1 млн за порушення, до 20 років ув'язнення. 'Розберемося пізніше' — найдорожча стратегія.",
         ],
         sources: [
           { label: "State Department DDTC", url: "https://www.pmddtc.state.gov" },
@@ -449,16 +492,16 @@ export const OVERVIEW: OverviewSection[] = [
   {
     id: "hiring",
     eyebrow: "Hiring & roles",
-    title: "Кого ви наймаєте, у якому порядку і чому",
+    title: "Кого наймати, у якому порядку",
     summary:
-      "Найм у defense-hardware не схожий ні на що з SaaS-найму. Кандидатів менше, обмеження clearance і громадянства мають значення, mission pull — це реальний compensation lever, а неправильний найм може втопити program milestone. Ось як виглядають перші 20 → 100 наймів на практиці.",
+      "Defense-найм не схожий на SaaS. Менше кандидатів, clearance і громадянство мають значення, mission — реальний compensation lever. Ось що ми помітили в перших 20 → 100 наймах.",
     cards: [
       {
         title: "Трикутник засновників",
         body: [
-          "У consumer software команда з двох засновників CEO/CTO може credibly випустити MVP. У defense hardware життєздатна команда засновників зазвичай потребує трьох архетипів — mission/government-credible CEO, systems-level CTO, і operations/виробничо-орієнтований COO-еквівалент — бо бізнес одночасно мусить виграти замовника, який говорить спеціалізованим діалектом, інженерити фізичний продукт проти брутальних environmental specs, і поставити compliant supply та production систему.",
-          "Комбінація Saronic — канонічний приклад: CEO Dino Mavrookas (Navy SEAL, одинадцять років служби, вісім бойових турів) у парі з CTO Vibhav Altekar (autonomy architecture). Тріо Shield AI (Ryan Tseng, Brandon Tseng, Andrew Reiter) покриває ті самі три осі: hardware commercial experience, operational/uniformed domain knowledge і глибокий research.",
-          "Профіль defense-CEO справді інший. Defense-замовники купують через відносини і доступ до program office, а не через self-service funnels. Засновникам потрібен високий 'defense IQ' — зароблений через попередню військову службу, цивільну DoD-кар'єру або глибокі program-office relationships — бо contracting officers повинні довіряти команді достатньо, щоб взяти ризик на SBIR, OTA або інший non-traditional vehicle.",
+          "У SaaS два co-founders (CEO/CTO) випускають MVP. У defense hardware потрібні три осі: mission/government CEO, systems-level CTO, і operations/manufacturing COO. Бо одночасно треба виграти замовника, побудувати апарат і поставити compliant supply chain.",
+          "Saronic: CEO Navy SEAL + CTO autonomy. Shield AI: consumer HW + ex-SEAL + CV research. Той самий патерн — one per axis — скрізь.",
+          "Defense CEO — інший профіль. Замовники купують через відносини і program-office access. Потрібен 'defense IQ', зароблений через військову службу або DoD-кар'єру.",
         ],
         sources: [
           { label: "Saronic Team", url: "https://www.saronic.com/team" },
@@ -495,11 +538,11 @@ export const OVERVIEW: OverviewSection[] = [
         ],
       },
       {
-        title: "Неправильні найми і як вони провалюються",
+        title: "Неправильні найми",
         body: [
-          "Класичний failure mode — наймати senior ex-big-tech інженерів, які ніколи не шипили фізичний продукт. Вони приносять сильну software-інтуїцію і погані hardware-інстинкти: хочуть швидко ітеруватися над дизайном, який фізично заморожено за три місяці до trial, недооцінюють документацію і трактують compliance як бюрократичний overhead, а не feature requirement.",
-          "Інший failure mode — пере-наймати з праймів: отримуєте повністю process-compliant команду, яка не може рухатися зі startup-швидкістю. Вони звикли до контексту, де питання 'чому немає формального ECO-процесу для цієї маленької зміни' має sensible відповідь, а при 20 особах відповідь — 'бо нас тут лише четверо і ми спілкуємося щодня'.",
-          "Warning signs на інтерв'ю: кандидати, що не можуть назвати абревіатури, з якими працювали (CDRL, DID, DR, FCA, PCA, ECP, PRR, CDR); кандидати, що кілька років не торкалися фізичного прототипу; кандидати, що формулюють engineering-проблеми виключно в software-термінах; кандидати, що mission-curious, але не мають релевантного hardware-досвіду.",
+          "Failure mode #1: senior ex-big-tech, що ніколи не шипили фізичний продукт. Сильна software-інтуїція, погані hardware-інстинкти — хочуть ітеруватися над дизайном, що фізично заморожений за три місяці до trial.",
+          "Failure mode #2: пере-наймати з праймів. Process-compliant команда, що не може рухатися зі startup-швидкістю. При 20 осіб відповідь на 'чому немає ECO-процесу' — 'бо нас четверо і ми говоримо щодня'.",
+          "Red flags на інтерв'ю: не називають жодної абревіатури (CDRL, CDR, PRR, ECP); кілька років не торкались прототипу; формулюють проблеми тільки в software-термінах.",
         ],
       },
       {
