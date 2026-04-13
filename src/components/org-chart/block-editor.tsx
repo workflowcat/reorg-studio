@@ -63,7 +63,7 @@ export function BlockEditor({
       </CardHeader>
       <CardBody className="space-y-4">
         <div className="space-y-1.5">
-          <Label htmlFor="name">Назва</Label>
+          <Label htmlFor="name">Name</Label>
           <Input
             id="name"
             value={block.name}
@@ -73,7 +73,7 @@ export function BlockEditor({
 
         <div className="grid grid-cols-2 gap-2">
           <div className="space-y-1.5">
-            <Label htmlFor="code">Код</Label>
+            <Label htmlFor="code">Code</Label>
             <Input
               id="code"
               value={block.code}
@@ -85,7 +85,7 @@ export function BlockEditor({
             <Input
               id="reportsTo"
               value={block.reportsTo ?? ""}
-              placeholder="напр. CEO"
+              placeholder="e.g. CEO"
               onChange={(e) =>
                 updateBlock(block.id, { reportsTo: e.target.value })
               }
@@ -103,7 +103,7 @@ export function BlockEditor({
         </div>
 
         <div className="space-y-1.5">
-          <Label>Колір</Label>
+          <Label>Color</Label>
           <div className="flex flex-wrap gap-1.5">
             {COLOR_OPTIONS.map((c) => {
               const cc = blockColor(c);
@@ -126,7 +126,7 @@ export function BlockEditor({
         </div>
 
         <div className="space-y-1.5">
-          <Label htmlFor="parent">Батьківський блок</Label>
+          <Label htmlFor="parent">Parent block</Label>
           <select
             id="parent"
             value={block.parentId ?? ""}
@@ -147,7 +147,7 @@ export function BlockEditor({
         <div className="space-y-2 pt-2">
           <div className="flex items-center gap-2">
             <Users className="h-3.5 w-3.5 text-zinc-500" />
-            <Label>Штат по фазах</Label>
+            <Label>Headcount by phase</Label>
           </div>
           <div className="space-y-2">
             {PHASES.map((p) => {
@@ -165,7 +165,7 @@ export function BlockEditor({
                 >
                   <div className="flex-1">
                     <div className="text-[10px] uppercase tracking-wider text-zinc-500">
-                      Фаза {p.id}
+                      Phase {p.id}
                     </div>
                     <div className="text-[11px] text-zinc-700 font-medium">
                       {p.shortLabel}
@@ -200,7 +200,7 @@ export function BlockEditor({
                     className="h-7 w-12 rounded-md border border-zinc-300 bg-white px-2 text-[11px] tabular-nums text-center"
                   />
                   <span className="text-[10px] text-zinc-500 w-16 text-right tabular-nums">
-                    {formatRange(r.min, r.max)} осіб
+                    {formatRange(r.min, r.max)} ppl
                   </span>
                 </div>
               );
@@ -215,7 +215,7 @@ export function BlockEditor({
             onClick={() => {
               if (
                 confirm(
-                  `Видалити ${block.name}? Всі суб-блоки і ролі також будуть видалені.`,
+                  `Remove ${block.name}? All sub-blocks and roles will also be deleted.`,
                 )
               ) {
                 removeBlock(block.id);
@@ -223,7 +223,7 @@ export function BlockEditor({
               }
             }}
           >
-            <Trash2 className="h-3 w-3" /> Видалити блок
+            <Trash2 className="h-3 w-3" /> Remove block
           </Button>
         </div>
       </CardBody>

@@ -1,56 +1,52 @@
 # Reorg Studio
 
-> Внутрішній planning-інструмент для проєктування і stress-testing орг-структури малої defense-hardware R&D команди при масштабуванні від 20 → 50 → 100+ осіб.
+> An internal planning tool for designing and stress-testing the organisational structure of a small defense-hardware R&D team as it scales from 20 → 50 → 100+ people.
 
-Reorg Studio — single-page web app (Next.js 16, деплой на Vercel без конфігурації), створений для leadership-команди, щоб спільно планувати реорганізацію. Має три тісно інтегровані workspace-и:
+Reorg Studio is a single-page web app (Next.js 16, deployable on Vercel with zero configuration) built for a leadership team to jointly plan a team reorganisation. It has three tightly integrated workspaces:
 
-1. **Overview** — research-backed брифінг про те, як насправді організовані співставні defense-hardware компанії, які org-design frameworks переносяться (а які ні), який compliance floor формує організацію, і які hiring waves визначають кожен перехід між фазами росту.
-2. **Org Chart** — інтерактивний block-based org-chart builder. Редагуйте блоки, purposes, діапазони штату і parent-relationships для кожної фази росту (Foundation / Growth / Scale).
-3. **RACI Matrix** — кольоровий RACI-редактор з автоматичним аудитом, що позначає активності без Accountable-власника або без Responsible-сторони.
+1. **Overview** — a research-backed briefing on how comparable defense-hardware companies actually structure their teams, the org design frameworks that transfer (and the ones that don't), the compliance floor that shapes the org, and the hiring waves that define each scale transition.
+2. **Org Chart** — an interactive block-based org chart builder. Edit blocks, purposes, headcount bands and parent relationships for each growth phase (Foundation / Growth / Scale).
+3. **RACI Matrix** — a colour-coded RACI editor with an automatic audit that flags activities with no accountable owner or no responsible party.
 
-Усе живе в `localStorage`. Немає бекенду, немає телеметрії, немає серверних даних. Команда шерить сценарії через експорт JSON зі сторінки Scenarios.
+Everything lives in `localStorage`. There is no backend, no telemetry, no server-side data. Teammates share scenarios by exporting JSON from the Scenarios page.
 
-## Мова інтерфейсу
+## Requirements
 
-UI повністю українською, з англійськими термінами там, де англійська — фактична робоча мова цього домену: RACI, R&D, ITAR, AS9100, CMMC, NIST, TRL, IPT, CEO/COO/CTO, Program Manager, Skunk Works, ROS2, SolidWorks, ANSYS і назви компаній-бенчмарків (Anduril, Shield AI, Saronic тощо).
+- Node.js 20.9 or later (Next.js 16 requirement)
+- npm 10 or later
 
-## Вимоги
-
-- Node.js 20.9 або новіше (вимога Next.js 16)
-- npm 10 або новіше
-
-## Як запустити
+## Getting started
 
 ```bash
 npm install
 npm run dev
 ```
 
-Відкрийте <http://localhost:3000>.
+Open <http://localhost:3000>.
 
-## Доступні скрипти
+## Available scripts
 
 ```bash
-npm run dev      # dev server (Turbopack)
-npm run build    # production build
-npm run start    # запуск production build
+npm run dev      # Start the dev server (Turbopack)
+npm run build    # Production build
+npm run start    # Run the production build
 npm run lint     # ESLint
 ```
 
-## Деплой на Vercel
+## Deploying to Vercel
 
-Проєкт спроєктовано для деплою на Vercel без додаткової конфігурації.
+This project is designed to deploy to Vercel with no additional configuration.
 
-1. Запушити репо в GitHub, GitLab або Bitbucket.
-2. Перейти на <https://vercel.com/new> і імпортувати репо.
-3. Прийняти авто-детектовані налаштування Vercel для Next.js (framework preset: Next.js, root directory: `./`, build command: `next build`, output directory: `.next`).
-4. Натиснути **Deploy**.
+1. Push this repo to GitHub, GitLab or Bitbucket.
+2. Go to <https://vercel.com/new> and import the repo.
+3. Accept Vercel's auto-detected Next.js settings (framework preset: Next.js, root directory: `./`, build command: `next build`, output directory: `.next`).
+4. Hit **Deploy**.
 
-Змінних середовища немає, зовнішніх сервісів налаштовувати не треба. Перший деплой має завершитись менш ніж за 90 секунд. Кожен push у `main` тригерить production-деплой; кожен push у будь-яку іншу гілку створює preview URL, який можна шерити команді.
+There are no environment variables and no external services to configure. First deploy should complete in under 90 seconds. Every push to `main` triggers a production deploy; every push to any other branch produces a preview URL that can be shared with teammates.
 
 ### Self-hosting alternative
 
-Якщо Vercel не підходить, будь-який Node 20+ host, що вміє запускати `next start`, спрацює. Можна також запустити production build у Docker:
+If Vercel isn't an option, any Node 20+ host that can run `next start` will work. You can also run the production build in Docker:
 
 ```Dockerfile
 FROM node:20-alpine
@@ -64,72 +60,72 @@ EXPOSE 3000
 CMD ["npm", "run", "start"]
 ```
 
-## Структура проєкту
+## Project structure
 
 ```
 src/
 ├── app/
-│   ├── layout.tsx              Root layout + глобальна навігація
-│   ├── page.tsx                Overview / лендінг
-│   ├── org-chart/page.tsx      Org-chart builder
+│   ├── layout.tsx              Root layout + global nav
+│   ├── page.tsx                Overview / landing
+│   ├── org-chart/page.tsx      Org chart builder
 │   ├── raci/page.tsx           RACI matrix
-│   └── scenarios/page.tsx      Метадані сценарію + експорт/імпорт
+│   └── scenarios/page.tsx      Scenario metadata + export/import
 ├── components/
-│   ├── site-header.tsx         Глобальна навігація
+│   ├── site-header.tsx         Global nav
 │   ├── hydrated.tsx            Hydration-safe wrapper
-│   ├── ui/primitives.tsx       Button, Card, Badge, Input і т.д.
+│   ├── ui/primitives.tsx       Button, Card, Badge, Input, etc.
 │   ├── org-chart/
-│   │   ├── workspace.tsx       Дерево + toolbar + phase switcher
-│   │   └── block-editor.tsx    Side-panel для редагування вибраного блока
+│   │   ├── workspace.tsx       Tree + toolbar + phase switcher
+│   │   └── block-editor.tsx    Side panel for editing a selected block
 │   ├── raci/workspace.tsx      Matrix editor + audit
-│   └── scenarios/workspace.tsx Метадані, експорт, імпорт, reset
+│   └── scenarios/workspace.tsx Metadata, export, import, reset
 ├── content/
-│   └── overview.ts             Research-backed контент для overview-сторінки
+│   └── overview.ts             Research-backed content for the overview page
 └── lib/
-    ├── types.ts                Domain-типи
-    ├── default-data.ts         Seed-сценарій (phases, blocks, roles, RACI)
-    ├── store.ts                Zustand store + localStorage persistence
-    └── utils.ts                Хелпери (cn, formatRange, slug)
+    ├── types.ts                Domain types
+    ├── default-data.ts         Seed scenario (phases, blocks, roles, RACI)
+    ├── store.ts                zustand store + localStorage persistence
+    └── utils.ts                Small helpers (cn, formatRange, slug)
 ```
 
 ## Data model
 
-Застосунок оперує **Scenario** — це чистий JSON-об&#39;єкт, який містить:
+The app operates on a **Scenario**, which is a pure JSON object that contains:
 
-- `phases` (фіксовано: Foundation, Growth, Scale)
-- `blocks` — функціональні департаменти з parent-child ієрархією і діапазонами штату по фазах
-- `roles` — визначення окремих ролей, прив&#39;язаних до блоків
-- `raci` — активності з R / A / C / I призначеннями по блоках
+- `phases` (fixed: Foundation, Growth, Scale)
+- `blocks` — functional departments, with parent-child hierarchy and headcount bands per phase
+- `roles` — individual role definitions attached to blocks
+- `raci` — activities with R / A / C / I assignments per block
 
-Сценарій персистується у `localStorage` під ключем `reorg-tool-v2-ua`. Його можна експортувати в JSON і закомітити у version control поруч із вашим product roadmap — це дає реально корисний planning-артефакт, що еволюціонує разом з бізнесом.
+The scenario is persisted to `localStorage` under the key `reorg-tool-v3`. You can export it to JSON and check it into version control alongside your product roadmap — it makes a genuinely useful planning artefact that evolves with the business.
 
-## Типовий workflow
+## Typical workflow
 
-1. Член leadership-team відкриває застосунок і читає **Overview**, щоб отримати спільний словник.
-2. В **Org Chart** клікає через Фазу 1 / 2 / 3, щоб побачити, як дефолтна структура еволюціонує.
-3. Починає редагувати блоки — змінює діапазони штату, перейменовує, reparent-ить команди — щоб відповідало живій компанії.
-4. Переходить до **RACI Matrix** і редагує ownership-и активностей, доки аудит не стане зеленим (кожна активність має рівно одного Accountable-власника).
-5. Зі сторінки **Scenarios** експортує сценарій як JSON і шерить у Slack / email / git на рев&#39;ю.
-6. Команда імпортує JSON, вносить правки, експортує знову. Сценарії можна version-контролити.
+1. A leadership-team member opens the app and reads the **Overview** to get shared vocabulary.
+2. In the **Org Chart** they click through Phase 1 / 2 / 3 to see how the default structure evolves.
+3. They start editing blocks — changing headcount bands, renaming things, reparenting teams — to match the live company.
+4. They move to the **RACI Matrix** and edit activity ownership until the audit turns green (every activity has exactly one Accountable owner).
+5. From the **Scenarios** page they export the scenario as JSON and share it in Slack / email / git for review.
+6. Teammates import the JSON, make edits, export again. Scenarios can be version-controlled.
 
-## Що свідомо відсутнє (v0.1)
+## What's intentionally missing (v0.1)
 
-- **Multi-user колаборація в браузері** — це single-user інструмент. Шеринг — через JSON-експорт. Для real-time колаборації найпростіший upgrade — додати Vercel KV або Supabase і зберігати сценарій під shareable URL.
-- **Diff між сценаріями** — можна експортувати кілька сценаріїв, але візуального diff UI немає. Якщо треба — відправна точка це `scenarios/compare/page.tsx`, що приймає два JSON-и.
-- **Role editor** — ролі є в data model і заcідані, але UI для індивідуального редагування ще не побудований. Block editor покриває більшість use case-ів на малому масштабі.
-- **Print / PDF export** — сторінки print-friendly, але дедикованої кнопки «Export to PDF» немає.
-- **Auth** — логіну немає. Свідомо для v0.1, оскільки все живе у браузері.
+- **Multi-user collaboration in-browser** — this is a single-user tool. Sharing happens via JSON export. For real-time collaboration, the simplest upgrade is to add Vercel KV or Supabase and store the scenario under a shareable URL.
+- **Diff between scenarios** — you can export multiple scenarios, but there's no visual diff UI. If you need it, a starting point is a `scenarios/compare/page.tsx` that accepts two JSONs.
+- **Role editor** — roles exist in the data model and are seeded, but the UI for editing roles individually is not built yet. The block editor covers most use cases at small scale.
+- **Print / PDF export** — the pages are print-friendly but there's no dedicated "Export to PDF" button.
+- **Auth** — no login. Intentional at v0.1 because everything lives in the browser.
 
-## Стек
+## Stack
 
 - Next.js 16.2 (App Router, Turbopack)
 - React 19.2
 - TypeScript 5
 - Tailwind CSS 4
 - Zustand 5 (client state + localStorage persistence)
-- dnd-kit (встановлено для майбутньої drag-and-drop реорг-фічі)
-- lucide-react (іконки)
+- dnd-kit (installed for a future drag-and-drop reorg feature)
+- lucide-react (icons)
 
-## Ліцензія
+## License
 
-Внутрішній інструмент. Не перерозповсюджувати без згоди leadership-team.
+Internal tool. Do not redistribute without consent from the leadership team.

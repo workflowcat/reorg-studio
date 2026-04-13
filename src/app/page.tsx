@@ -20,22 +20,22 @@ function ProfileCard({ profile: p }: { profile: CompanyProfile }) {
         <div className="text-[11px] text-zinc-500 mt-0.5">{p.tagline}</div>
       </div>
       <div className="px-4 py-3 grid grid-cols-2 gap-x-4 gap-y-1.5 text-[11px] border-b border-zinc-100">
-        <div><span className="text-zinc-400">Засновано</span> <span className="text-zinc-700 ml-1">{p.founded}</span></div>
-        <div><span className="text-zinc-400">Штат</span> <span className="text-zinc-700 ml-1">{p.headcount}</span></div>
+        <div><span className="text-zinc-400">Founded</span> <span className="text-zinc-700 ml-1">{p.founded}</span></div>
+        <div><span className="text-zinc-400">Headcount</span> <span className="text-zinc-700 ml-1">{p.headcount}</span></div>
         <div><span className="text-zinc-400">Eng</span> <span className="text-zinc-700 ml-1">{p.engRatio}</span></div>
         <div><span className="text-zinc-400">HQ</span> <span className="text-zinc-700 ml-1">{p.hq}</span></div>
         {p.production && (
-          <div className="col-span-2"><span className="text-zinc-400">Завод</span> <span className="text-zinc-700 ml-1">{p.production}</span></div>
+          <div className="col-span-2"><span className="text-zinc-400">Production</span> <span className="text-zinc-700 ml-1">{p.production}</span></div>
         )}
-        <div className="col-span-2"><span className="text-zinc-400">Засновники</span> <span className="text-zinc-700 ml-1">{p.founders}</span></div>
+        <div className="col-span-2"><span className="text-zinc-400">Founders</span> <span className="text-zinc-700 ml-1">{p.founders}</span></div>
       </div>
       <div className="px-4 py-3 space-y-2 text-[11px] text-zinc-600 leading-relaxed">
         <div>
-          <div className="text-[10px] uppercase tracking-wider text-zinc-400 mb-0.5">Ключовий хід</div>
+          <div className="text-[10px] uppercase tracking-wider text-zinc-400 mb-0.5">Key move</div>
           {p.keyMove}
         </div>
         <div>
-          <div className="text-[10px] uppercase tracking-wider text-zinc-400 mb-0.5">Що копіювати</div>
+          <div className="text-[10px] uppercase tracking-wider text-zinc-400 mb-0.5">What to copy</div>
           {p.whatToCopy}
         </div>
       </div>
@@ -68,16 +68,16 @@ export default function Home() {
         <div className="bg-grid absolute inset-0 opacity-60" />
         <div className="relative px-8 py-12 md:py-16 md:px-12 max-w-3xl">
           <Badge tone="outline" className="mb-4 text-zinc-500">
-            Внутрішній planning-інструмент · v0.1
+            Internal planning tool · v0.1
           </Badge>
           <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-zinc-900 leading-[1.1]">
-            Спроєктуй орг-структуру перш ніж наймати під неї.
+            Design the org before you hire the org.
           </h1>
           <p className="mt-4 text-sm md:text-base text-zinc-600 leading-relaxed max-w-xl">
-            Planning-канва для малих defense-hardware R&amp;D команд, що
-            ростуть з 20 до 50, до 100+ осіб. Змоделюй структуру, розстав
-            фази росту і перевір на міцність, хто за що відповідає — ще до
-            того, як розпочнеться розмова про реорг.
+            A planning canvas for small defense-hardware R&amp;D teams
+            scaling from 20 to 50 to 100+ people. Model the structure, lay
+            out growth phases, and stress-test who owns what — before the
+            reorg conversation starts.
           </p>
 
           <div className="mt-7 flex flex-wrap gap-2">
@@ -86,7 +86,7 @@ export default function Home() {
               className="inline-flex items-center gap-2 rounded-md bg-zinc-900 px-4 py-2 text-xs font-medium text-white hover:bg-zinc-800"
             >
               <Network className="h-3.5 w-3.5" />
-              Відкрити org chart
+              Open the org chart
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
             <Link
@@ -94,7 +94,7 @@ export default function Home() {
               className="inline-flex items-center gap-2 rounded-md border border-zinc-300 bg-white px-4 py-2 text-xs font-medium text-zinc-700 hover:bg-zinc-50"
             >
               <Grid3x3 className="h-3.5 w-3.5" />
-              Відкрити RACI matrix
+              Open the RACI matrix
             </Link>
           </div>
         </div>
@@ -102,10 +102,10 @@ export default function Home() {
         {/* Stats */}
         <div className="relative grid grid-cols-2 md:grid-cols-4 border-t border-zinc-200">
           {[
-            { label: "Розмір founding team", value: "20", icon: Users },
-            { label: "Ціль росту", value: "100+", icon: Building2 },
-            { label: "Функціональні блоки", value: "6", icon: Layers },
-            { label: "Незалежний QA", value: "Завжди", icon: ShieldCheck },
+            { label: "Founding team size", value: "20", icon: Users },
+            { label: "Growth target", value: "100+", icon: Building2 },
+            { label: "Functional blocks", value: "6", icon: Layers },
+            { label: "Independent QA", value: "Always", icon: ShieldCheck },
           ].map(({ label, value, icon: Icon }) => (
             <div
               key={label}
@@ -128,12 +128,12 @@ export default function Home() {
         <div className="flex items-end justify-between mb-5">
           <div>
             <h2 className="text-lg font-semibold tracking-tight text-zinc-900">
-              Фази росту
+              Growth phases
             </h2>
             <p className="text-xs text-zinc-500 mt-1">
-              Три staging-точки, де орг-структура мусить суттєво змінитися — не
-              через чисельність заради чисельності, а через речі, що
-              ламаються на кожній межі.
+              Three staging points where the org structure has to change
+              materially — not for headcount&apos;s sake, but because things
+              break at each boundary.
             </p>
           </div>
         </div>
@@ -142,9 +142,9 @@ export default function Home() {
             <Card key={phase.id}>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <Badge tone="dark">Фаза {phase.id}</Badge>
+                  <Badge tone="dark">Phase {phase.id}</Badge>
                   <span className="text-xs font-mono text-zinc-500">
-                    {phase.shortLabel} осіб
+                    {phase.shortLabel} people
                   </span>
                 </div>
                 <CardTitle className="mt-2">{phase.name}</CardTitle>
@@ -183,11 +183,11 @@ export default function Home() {
                 <table className="w-full min-w-[800px] border-collapse text-[11px]">
                   <thead>
                     <tr className="bg-zinc-50 border-b border-zinc-200">
-                      <th className="text-left px-3 py-2 font-semibold text-zinc-900">Компанія</th>
-                      <th className="text-left px-3 py-2 font-medium text-zinc-500">Рік</th>
-                      <th className="text-left px-3 py-2 font-medium text-zinc-500">Штат</th>
+                      <th className="text-left px-3 py-2 font-semibold text-zinc-900">Company</th>
+                      <th className="text-left px-3 py-2 font-medium text-zinc-500">Year</th>
+                      <th className="text-left px-3 py-2 font-medium text-zinc-500">HC</th>
                       <th className="text-left px-3 py-2 font-medium text-zinc-500">Eng %</th>
-                      <th className="text-left px-3 py-2 font-medium text-zinc-500">Ключовий хід</th>
+                      <th className="text-left px-3 py-2 font-medium text-zinc-500">Key move</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -232,7 +232,7 @@ export default function Home() {
                   {c.sources && c.sources.length > 0 ? (
                     <div className="pt-2 border-t border-zinc-100 mt-3">
                       <div className="text-[10px] uppercase tracking-wider text-zinc-400 mb-1">
-                        Джерела
+                        Sources
                       </div>
                       <ul className="space-y-0.5">
                         {c.sources.map((s, i) => (
@@ -268,12 +268,12 @@ export default function Home() {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div className="max-w-lg">
             <h3 className="text-lg font-semibold tracking-tight">
-              Готові намалювати орг-структуру?
+              Ready to draw the org?
             </h3>
             <p className="mt-2 text-sm text-zinc-300">
-              Усе на цій сторінці редагується. Налаштуй блоки, переставляй
-              людей, переписуй RACI під свою operating model. Ваші зміни
-              лишаються у браузері — нічого не покидає пристрій.
+              Everything on this page is editable. Adjust blocks, move
+              people around, rewrite the RACI to fit your operating model.
+              Your changes stay in the browser — nothing leaves the device.
             </p>
           </div>
           <div className="flex gap-2">

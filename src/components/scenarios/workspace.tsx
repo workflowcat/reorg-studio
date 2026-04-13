@@ -72,13 +72,13 @@ export function ScenariosWorkspace() {
           !Array.isArray(parsed.blocks) ||
           !Array.isArray(parsed.raci)
         ) {
-          throw new Error("Цей файл не схожий на експорт сценарію.");
+          throw new Error("This file doesn't look like a scenario export.");
         }
         // Overwrite current scenario with imported one.
         useStore.setState({ scenario: parsed });
       } catch (err) {
         setImportError(
-          err instanceof Error ? err.message : "Не вдалося розпарсити JSON.",
+          err instanceof Error ? err.message : "Failed to parse JSON.",
         );
       }
     };
@@ -91,15 +91,15 @@ export function ScenariosWorkspace() {
       {/* Metadata */}
       <Card>
         <CardHeader>
-          <CardTitle>Деталі сценарію</CardTitle>
+          <CardTitle>Scenario details</CardTitle>
           <CardDescription>
-            Дайте сценарію осмислену назву, щоб команда розуміла, що саме
-            ви змоделювали.
+            Give this scenario a meaningful name so teammates know what
+            you&rsquo;ve modelled.
           </CardDescription>
         </CardHeader>
         <CardBody className="space-y-4">
           <div className="space-y-1.5">
-            <Label htmlFor="name">Назва</Label>
+            <Label htmlFor="name">Name</Label>
             <Input
               id="name"
               value={scenario.name}
@@ -107,7 +107,7 @@ export function ScenariosWorkspace() {
             />
           </div>
           <div className="space-y-1.5">
-            <Label htmlFor="desc">Опис</Label>
+            <Label htmlFor="desc">Description</Label>
             <Textarea
               id="desc"
               value={scenario.description}
@@ -115,8 +115,8 @@ export function ScenariosWorkspace() {
             />
           </div>
           <div className="text-[10px] text-zinc-400 font-mono">
-            Останнє оновлення:{" "}
-            {new Date(scenario.updatedAt).toLocaleString("uk-UA")}
+            Last updated:{" "}
+            {new Date(scenario.updatedAt).toLocaleString()}
           </div>
         </CardBody>
       </Card>
@@ -124,9 +124,9 @@ export function ScenariosWorkspace() {
       {/* Summary */}
       <Card>
         <CardHeader>
-          <CardTitle>Підсумок по фазах</CardTitle>
+          <CardTitle>Summary by phase</CardTitle>
           <CardDescription>
-            Знімок поточного сценарію на кожній фазі росту.
+            Snapshot of the current scenario at each growth phase.
           </CardDescription>
         </CardHeader>
         <CardBody>
@@ -144,7 +144,7 @@ export function ScenariosWorkspace() {
                   className="rounded-lg border border-zinc-200 bg-zinc-50 p-3"
                 >
                   <div className="flex items-center justify-between mb-1.5">
-                    <Badge tone="dark">Фаза {p.id}</Badge>
+                    <Badge tone="dark">Phase {p.id}</Badge>
                     <span className="text-[10px] font-mono text-zinc-500">
                       {p.shortLabel}
                     </span>
@@ -153,7 +153,7 @@ export function ScenariosWorkspace() {
                     {formatRange(total.min, total.max)}
                   </div>
                   <div className="text-[10px] text-zinc-500">
-                    {activeBlocks.length} активних core-блоків
+                    {activeBlocks.length} active core blocks
                   </div>
                 </div>
               );
@@ -165,32 +165,32 @@ export function ScenariosWorkspace() {
       {/* Export / Import / Reset */}
       <Card>
         <CardHeader>
-          <CardTitle>Шеринг і персистентність</CardTitle>
+          <CardTitle>Share & persist</CardTitle>
           <CardDescription>
-            Ваш сценарій живе у localStorage на цьому пристрої. Експортуйте
-            у JSON, щоб поділитися з командою, або щоб закомітити його у
-            version control як planning-артефакт.
+            Your scenario lives in localStorage on this device. Export to
+            JSON to share it with teammates, or to check it into version
+            control as a planning artefact.
           </CardDescription>
         </CardHeader>
         <CardBody className="space-y-3">
           <div className="flex flex-wrap gap-2">
             <Button onClick={exportJson}>
               <Download className="h-3 w-3" />
-              Експорт JSON
+              Export JSON
             </Button>
             <Button variant="outline" onClick={copyJson}>
               {copied ? (
                 <>
-                  <Check className="h-3 w-3" /> Скопійовано
+                  <Check className="h-3 w-3" /> Copied
                 </>
               ) : (
                 <>
-                  <Copy className="h-3 w-3" /> Скопіювати у буфер
+                  <Copy className="h-3 w-3" /> Copy to clipboard
                 </>
               )}
             </Button>
             <Button variant="outline" onClick={handleImportClick}>
-              <Upload className="h-3 w-3" /> Імпорт JSON
+              <Upload className="h-3 w-3" /> Import JSON
             </Button>
             <input
               ref={fileRef}
@@ -205,30 +205,30 @@ export function ScenariosWorkspace() {
                 onClick={() => {
                   if (
                     confirm(
-                      "Скинути сценарій до дефолтного baseline? Ваші зміни будуть втрачені.",
+                      "Reset scenario to the default baseline? Your edits will be lost.",
                     )
                   ) {
                     resetScenario();
                   }
                 }}
               >
-                <RotateCcw className="h-3 w-3" /> Скинути до baseline
+                <RotateCcw className="h-3 w-3" /> Reset to baseline
               </Button>
             </div>
           </div>
           {importError && (
             <div className="text-[11px] text-rose-700 bg-rose-50 border border-rose-200 rounded-md px-3 py-2">
-              Імпорт не вдався: {importError}
+              Import failed: {importError}
             </div>
           )}
           <Divider />
           <div className="flex items-start gap-2 text-[11px] text-zinc-500">
             <FileJson className="h-3.5 w-3.5 mt-0.5 shrink-0" />
             <span>
-              Експортований JSON містить блоки, ролі і RACI matrix.
-              Повторний імпорт замінює поточний сценарій. Використовуйте
-              це для рев&apos;ю, архівації рішень або version-control-у
-              орг-змін поруч із вашим product roadmap.
+              The exported JSON contains blocks, roles and the RACI matrix.
+              Re-importing replaces the current scenario. Use this for
+              reviews, archiving decisions, or version-controlling org
+              changes alongside your product roadmap.
             </span>
           </div>
         </CardBody>

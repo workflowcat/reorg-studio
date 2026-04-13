@@ -6,10 +6,10 @@ import { cn } from "@/lib/utils";
 import { Network, BookOpen, Grid3x3, LayoutGrid } from "lucide-react";
 
 const NAV = [
-  { href: "/", label: "Огляд", icon: BookOpen },
+  { href: "/", label: "Overview", icon: BookOpen },
   { href: "/org-chart", label: "Org Chart", icon: Network },
   { href: "/raci", label: "RACI Matrix", icon: Grid3x3 },
-  { href: "/scenarios", label: "Сценарії", icon: LayoutGrid },
+  { href: "/scenarios", label: "Scenarios", icon: LayoutGrid },
 ] as const;
 
 export function SiteHeader() {
@@ -29,9 +29,6 @@ export function SiteHeader() {
           </span>
           <span className="hidden sm:inline text-[11px] text-zinc-500 font-mono pl-2 border-l border-zinc-200 ml-1">
             defense R&amp;D team design
-          </span>
-          <span className="hidden md:inline text-[10px] text-zinc-400 font-mono pl-2 border-l border-zinc-200 ml-1">
-            UA
           </span>
         </Link>
 

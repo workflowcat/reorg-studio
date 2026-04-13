@@ -37,8 +37,8 @@ export function OrgChartWorkspace() {
     addBlock({
       id,
       code: "NEW",
-      name: "Новий блок",
-      purpose: "Опишіть, чим займається цей блок.",
+      name: "New block",
+      purpose: "Describe what this block does.",
       color: "zinc",
       parentId: "ceo",
       reportsTo: "CEO",
@@ -69,7 +69,7 @@ export function OrgChartWorkspace() {
                     : "text-zinc-600 hover:bg-zinc-100",
                 )}
               >
-                Фаза {p.id} · {p.shortLabel}
+                Phase {p.id} · {p.shortLabel}
               </button>
             ))}
           </div>
@@ -79,12 +79,12 @@ export function OrgChartWorkspace() {
             <span className="font-medium text-zinc-900 tabular-nums">
               {formatRange(total.min, total.max)}
             </span>
-            <span className="text-zinc-400">загальний штат (core blocks)</span>
+            <span className="text-zinc-400">total headcount (core blocks)</span>
           </div>
 
           <div className="ml-auto flex items-center gap-1.5">
             <Button size="sm" variant="outline" onClick={handleAddBlock}>
-              <Plus className="h-3 w-3" /> Додати блок
+              <Plus className="h-3 w-3" /> Add block
             </Button>
             <Button
               size="sm"
@@ -92,7 +92,7 @@ export function OrgChartWorkspace() {
               onClick={() => {
                 if (
                   confirm(
-                    "Скинути сценарій до дефолтного baseline? Ваші зміни будуть втрачені.",
+                    "Reset scenario to the default baseline? Your edits will be lost.",
                   )
                 ) {
                   resetScenario();
@@ -100,7 +100,7 @@ export function OrgChartWorkspace() {
                 }
               }}
             >
-              <RotateCcw className="h-3 w-3" /> Скинути
+              <RotateCcw className="h-3 w-3" /> Reset
             </Button>
           </div>
         </div>
@@ -149,12 +149,12 @@ function PhaseBanner({ phase }: { phase: PhaseId }) {
   return (
     <div className="rounded-lg border border-zinc-200 bg-zinc-50 px-4 py-3">
       <div className="flex items-start gap-3">
-        <Badge tone="dark">Фаза {p.id}</Badge>
+        <Badge tone="dark">Phase {p.id}</Badge>
         <div className="flex-1">
           <div className="flex items-center gap-2">
             <h3 className="text-sm font-semibold text-zinc-900">{p.name}</h3>
             <span className="text-[11px] text-zinc-500 font-mono">
-              {p.shortLabel} осіб
+              {p.shortLabel} people
             </span>
           </div>
           <p className="text-xs text-zinc-600 mt-1 leading-relaxed">
@@ -238,10 +238,10 @@ function BlockTreeNode({
               {isHidden && (
                 <span
                   className="inline-flex items-center gap-1 text-[9px] uppercase tracking-wider text-zinc-400"
-                  title="Ще не існує у цій фазі"
+                  title="Not present in this phase"
                 >
                   <Eye className="h-2.5 w-2.5" />
-                  пізніше
+                  later
                 </span>
               )}
               <span className="inline-flex items-center gap-1 rounded-md bg-zinc-100 px-2 py-0.5 text-[10px] font-semibold tabular-nums text-zinc-700">
@@ -279,8 +279,8 @@ function EmptySidePanel() {
         <X className="h-4 w-4 text-zinc-400" />
       </div>
       <p className="text-xs text-zinc-500">
-        Виберіть блок зліва, щоб редагувати його назву, purpose і діапазони
-        штату для кожної фази росту.
+        Select a block on the left to edit its name, purpose, and headcount
+        bands for each growth phase.
       </p>
     </div>
   );

@@ -194,7 +194,7 @@ export const useStore = create<StoreState>()(
         })),
     }),
     {
-      name: "reorg-tool-v2-ua",
+      name: "reorg-tool-v3",
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({ scenario: state.scenario }),
     },

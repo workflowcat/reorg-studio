@@ -15,25 +15,25 @@ const RACI_VALUES: { value: RaciValue; label: string; description: string; color
   {
     value: "R",
     label: "Responsible",
-    description: "Виконує роботу",
+    description: "Does the work",
     color: "bg-emerald-100 text-emerald-800 border-emerald-300",
   },
   {
     value: "A",
     label: "Accountable",
-    description: "Володіє результатом",
+    description: "Owns the outcome",
     color: "bg-sky-100 text-sky-800 border-sky-300",
   },
   {
     value: "C",
     label: "Consulted",
-    description: "Має вхід",
+    description: "Has input",
     color: "bg-amber-100 text-amber-800 border-amber-300",
   },
   {
     value: "I",
     label: "Informed",
-    description: "Тримають в курсі",
+    description: "Kept aware",
     color: "bg-zinc-100 text-zinc-700 border-zinc-300",
   },
 ];
@@ -86,8 +86,8 @@ export function RaciWorkspace() {
     const id = `a-${Date.now()}`;
     addActivity({
       id,
-      name: "Нова активність",
-      category: "Кастом",
+      name: "New activity",
+      category: "Custom",
       description: "",
       assignments: Object.fromEntries(
         columns.map((b) => [b.id, ""] as const),
@@ -99,7 +99,7 @@ export function RaciWorkspace() {
     <div className="space-y-4">
       {/* Legend */}
       <div className="flex flex-wrap items-center gap-2 rounded-lg border border-zinc-200 bg-white px-3 py-2 text-[11px]">
-        <span className="text-zinc-500 mr-1">Легенда:</span>
+        <span className="text-zinc-500 mr-1">Legend:</span>
         {RACI_VALUES.map((v) => (
           <span
             key={v.value}
@@ -112,7 +112,7 @@ export function RaciWorkspace() {
             <span className="text-[10px]">{v.description}</span>
           </span>
         ))}
-        <span className="text-zinc-400 ml-1">· клікни на комірку, щоб перемикати</span>
+        <span className="text-zinc-400 ml-1">· click a cell to cycle</span>
       </div>
 
       {/* Toolbar */}
@@ -122,7 +122,7 @@ export function RaciWorkspace() {
           <Input
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
-            placeholder="Пошук активностей…"
+            placeholder="Search activities…"
             className="pl-8"
           />
         </div>
@@ -138,14 +138,14 @@ export function RaciWorkspace() {
                   : "text-zinc-600 hover:bg-zinc-100",
               )}
             >
-              {cat === "all" ? "Усі" : cat}
+              {cat === "all" ? "All" : cat}
             </button>
           ))}
         </div>
         <div className="ml-auto flex items-center gap-2">
           <AuditBadge activities={scenario.raci} columns={columns} />
           <Button size="sm" variant="outline" onClick={handleAdd}>
-            <Plus className="h-3 w-3" /> Додати активність
+            <Plus className="h-3 w-3" /> Add activity
           </Button>
         </div>
       </div>
@@ -156,7 +156,7 @@ export function RaciWorkspace() {
           <thead>
             <tr className="bg-zinc-50 border-b border-zinc-200">
               <th className="sticky left-0 z-10 bg-zinc-50 text-left px-4 py-3 text-[10px] font-semibold uppercase tracking-wider text-zinc-500 border-r border-zinc-200 min-w-[260px]">
-                Активність
+                Activity
               </th>
               {columns.map((col) => (
                 <th
@@ -181,7 +181,7 @@ export function RaciWorkspace() {
                   colSpan={columns.length + 2}
                   className="p-8 text-center text-xs text-zinc-400"
                 >
-                  Жодна активність не відповідає фільтру.
+                  No activities match your filter.
                 </td>
               </tr>
             ) : (
@@ -235,11 +235,11 @@ export function RaciWorkspace() {
                   <td className="w-10 text-center">
                     <button
                       onClick={() => {
-                        if (confirm(`Видалити «${activity.name}»?`))
+                        if (confirm(`Remove "${activity.name}"?`))
                           removeActivity(activity.id);
                       }}
                       className="h-6 w-6 text-zinc-300 hover:text-rose-600 rounded-md grid place-items-center opacity-0 group-hover:opacity-100"
-                      aria-label="Видалити активність"
+                      aria-label="Remove activity"
                     >
                       <Trash2 className="h-3 w-3" />
                     </button>
@@ -268,14 +268,14 @@ function AuditBadge({
     return (
       <span className="inline-flex items-center gap-1 rounded-md border border-emerald-200 bg-emerald-50 px-2 py-1 text-[10px] text-emerald-700">
         <CheckCircle2 className="h-3 w-3" />
-        RACI чистий
+        RACI clean
       </span>
     );
   }
   return (
     <span className="inline-flex items-center gap-1 rounded-md border border-amber-200 bg-amber-50 px-2 py-1 text-[10px] text-amber-800">
       <AlertTriangle className="h-3 w-3" />
-      {issues.length} {pluralizeIssues(issues.length)}
+      {issues.length} issue{issues.length === 1 ? "" : "s"}
     </span>
   );
 }
@@ -292,9 +292,9 @@ function AuditPanel({
       <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-xs text-emerald-800 flex items-start gap-2">
         <CheckCircle2 className="h-4 w-4 shrink-0 mt-0.5" />
         <div>
-          <strong className="font-semibold">RACI аудит пройдено.</strong>{" "}
-          Кожна активність має рівно одного Accountable-власника і щонайменше
-          одного Responsible.
+          <strong className="font-semibold">RACI audit passes.</strong>{" "}
+          Every activity has exactly one Accountable owner and at least one
+          Responsible.
         </div>
       </div>
     );
@@ -304,7 +304,7 @@ function AuditPanel({
       <div className="flex items-start gap-2 mb-2">
         <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5" />
         <strong className="font-semibold">
-          RACI аудит — {issues.length} {pluralizeIssues(issues.length)}
+          RACI audit — {issues.length} issue{issues.length === 1 ? "" : "s"}
         </strong>
       </div>
       <ul className="space-y-1 ml-6 list-disc">
@@ -313,7 +313,7 @@ function AuditPanel({
         ))}
         {issues.length > 8 && (
           <li className="text-amber-600">
-            …і ще {issues.length - 8}
+            …and {issues.length - 8} more
           </li>
         )}
       </ul>
@@ -328,23 +328,15 @@ function auditRaci(activities: RaciActivity[]): string[] {
     const aCount = values.filter((v) => v === "A").length;
     const rCount = values.filter((v) => v === "R").length;
     if (aCount === 0) {
-      issues.push(`«${a.name}» не має Accountable-власника.`);
+      issues.push(`"${a.name}" has no Accountable owner.`);
     } else if (aCount > 1) {
       issues.push(
-        `«${a.name}» має ${aCount} Accountable-власників — має бути рівно один.`,
+        `"${a.name}" has ${aCount} Accountable owners — there should be exactly one.`,
       );
     }
     if (rCount === 0) {
-      issues.push(`«${a.name}» не має Responsible-виконавця.`);
+      issues.push(`"${a.name}" has no Responsible party.`);
     }
   }
   return issues;
-}
-
-function pluralizeIssues(n: number): string {
-  const mod10 = n % 10;
-  const mod100 = n % 100;
-  if (mod10 === 1 && mod100 !== 11) return "проблема";
-  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return "проблеми";
-  return "проблем";
 }

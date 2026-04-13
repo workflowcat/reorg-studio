@@ -9,7 +9,7 @@ export const PHASES: Phase[] = [
     shortLabel: "20 → 30",
     headcountRange: { min: 20, max: 30 },
     description:
-      "Струнка 4-блокова модель. Ліди працюють як playing-coaches. QA сидить всередині Manufacturing з незалежною ескалацією до CEO. Operations — один об'єднаний блок. Один основний державний контракт плюс 1–2 пілоти.",
+      "Lean 4-block model. Leads operate as playing-coaches. QA sits inside Manufacturing with independent escalation to CEO. Operations is a single combined block. One primary government contract plus 1-2 pilots.",
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ export const PHASES: Phase[] = [
     shortLabel: "30 → 50",
     headcountRange: { min: 30, max: 50 },
     description:
-      "Quality & Test відділяється в незалежний департамент, що репортує CEO. PMO формалізується з виділеними program managers. З'являється роль Security Officer. R&D масштабується до 14–18 осіб у трьох повних командах. AS9100 certification.",
+      "Quality & Test separates into an independent department reporting to CEO. PMO formalizes with dedicated program managers. Security Officer role appears. R&D scales to 14-18 people across three full teams. AS9100 certification.",
   },
   {
     id: 3,
@@ -25,7 +25,7 @@ export const PHASES: Phase[] = [
     shortLabel: "50 → 100+",
     headcountRange: { min: 50, max: 120 },
     description:
-      "Повна functional-matrix: функціональні вертикалі плюс per-platform Integrated Product Teams. COO володіє R&D, Manufacturing і Supply Chain. Кожна платформа має виділеного Program Manager. Security — повний стек (classification, cyber, export control).",
+      "Full functional-matrix: functional verticals plus per-platform Integrated Product Teams. COO owns R&D, Manufacturing, and Supply Chain. Each platform has a dedicated Program Manager. Security covers the full stack (classification, cyber, export control).",
   },
 ];
 
@@ -37,7 +37,7 @@ export const DEFAULT_BLOCKS: Block[] = [
     code: "CEO",
     name: "CEO / Founder",
     purpose:
-      "Стратегічний напрям, урядові відносини на рівні МО / procurement, інвесторські і донорські програми, незалежна ескалація від Quality.",
+      "Strategic direction, government relations at MoD / procurement level, investor and donor programs, independent escalation path for Quality.",
     color: "zinc",
     isCore: true,
     headcountByPhase: {
@@ -51,7 +51,7 @@ export const DEFAULT_BLOCKS: Block[] = [
     code: "COO",
     name: "COO / Head of R&D",
     purpose:
-      "Внутрішньо-орієнтований лідер. Володіє технічною стратегією, TRL roadmap, крос-R&D координацією та інтерфейсом R&D → Manufacturing. Головує на PDR / CDR / TRR / PRR gates.",
+      "Internally-focused leader. Owns technical strategy, TRL roadmap, cross-R&D coordination, and the R&D-to-Manufacturing interface. Chairs PDR / CDR / TRR / PRR gates.",
     color: "slate",
     parentId: "ceo",
     reportsTo: "CEO",
@@ -67,7 +67,7 @@ export const DEFAULT_BLOCKS: Block[] = [
     code: "R&D",
     name: "R&D — Engineering & Development",
     purpose:
-      "Технічне ядро. Механічні платформи, embedded системи, відео/зв'язок. Тримає dual portfolio — 70% еволюція платформ і 30% exploratory робота.",
+      "Technical core. Mechanical platforms, embedded systems, video/comms. Maintains a dual portfolio — 70% platform evolution and 30% exploratory work.",
     color: "amber",
     parentId: "coo",
     reportsTo: "COO",
@@ -83,7 +83,7 @@ export const DEFAULT_BLOCKS: Block[] = [
     code: "MFG",
     name: "Manufacturing",
     purpose:
-      "Мало-серійна збірка, закупівлі та — у фазі Foundation — вбудована QA з незалежною ескалацією до CEO. Фокус на гнучкості, traceability і якості, а не throughput.",
+      "Low-rate assembly, procurement, and — in the Foundation phase — embedded QA with independent escalation to CEO. Focus on flexibility, traceability, and quality rather than throughput.",
     color: "emerald",
     parentId: "ceo",
     reportsTo: "CEO",
@@ -99,7 +99,7 @@ export const DEFAULT_BLOCKS: Block[] = [
     code: "QAT",
     name: "Quality & Test",
     purpose:
-      "Незалежна QA, environmental і EMC тестування, IV&V для software, підтримка acceptance з боку замовника. У фазі Foundation QA вбудована всередині Manufacturing (штат рахується там) з незалежною ескалацією до CEO. Відокремлюється у власний блок у фазі Growth.",
+      "Independent QA, environmental and EMC testing, IV&V for software, customer acceptance support. In the Foundation phase QA is embedded inside Manufacturing (headcount counted there) with independent escalation to CEO. Separates into its own block in the Growth phase.",
     color: "rose",
     parentId: "ceo",
     reportsTo: "CEO (from Phase 2)",
@@ -115,7 +115,7 @@ export const DEFAULT_BLOCKS: Block[] = [
     code: "PMO",
     name: "Program Management Office",
     purpose:
-      "Центральний координаційний хаб для всіх платформних програм. Program managers ведуть крос-функціональні Integrated Product Teams і володіють інтерфейсом до державного замовника.",
+      "Central coordination hub for all platform programs. Program managers lead cross-functional Integrated Product Teams and own the government customer interface.",
     color: "violet",
     parentId: "ceo",
     reportsTo: "CEO",
@@ -130,7 +130,7 @@ export const DEFAULT_BLOCKS: Block[] = [
     code: "BDG",
     name: "Business Development & GR",
     purpose:
-      "Capture management, proposal writing, відносини з урядовими program offices, міжнародні партнерства і export-control aware BD.",
+      "Capture management, proposal writing, government program office relations, international partnerships, and export-control aware BD.",
     color: "sky",
     parentId: "ceo",
     reportsTo: "CEO",
@@ -146,7 +146,7 @@ export const DEFAULT_BLOCKS: Block[] = [
     code: "SEC",
     name: "Security & Compliance",
     purpose:
-      "Classification, facility security, cyber (NIST 800-171 / CMMC), export control (ITAR / EAR / Wassenaar). Незалежний від operations — може зупинити активність при security breach.",
+      "Classification, facility security, cyber (NIST 800-171 / CMMC), export control (ITAR / EAR / Wassenaar). Independent from operations — can halt activity on security breach.",
     color: "red",
     parentId: "ceo",
     reportsTo: "CEO",
@@ -161,7 +161,7 @@ export const DEFAULT_BLOCKS: Block[] = [
     code: "OPS",
     name: "Operations",
     purpose:
-      "Finance, HR, логістика, facilities, IT. Об'єднаний у фазі Foundation заради ефективності; розщеплюється на Finance / HR / Supply Chain зі зростанням штату.",
+      "Finance, HR, logistics, facilities, IT. Combined in the Foundation phase for efficiency; splits into Finance / HR / Supply Chain as headcount grows.",
     color: "teal",
     parentId: "ceo",
     reportsTo: "CEO",
@@ -178,7 +178,7 @@ export const DEFAULT_BLOCKS: Block[] = [
     code: "R&D-P",
     name: "Platforms",
     purpose:
-      "Шасі, підвіска, трансмісія, інтеграція payload. CAD/CAE, FEA, structural analysis. Лід — Product Owner для лінії механічних платформ.",
+      "Chassis, suspension, drivetrain, payload integration. CAD/CAE, FEA, structural analysis. Lead serves as Product Owner for the mechanical platform line.",
     color: "amber",
     parentId: "rnd",
     reportsTo: "R&D Lead / COO",
@@ -193,7 +193,7 @@ export const DEFAULT_BLOCKS: Block[] = [
     code: "R&D-E",
     name: "Embedded",
     purpose:
-      "Firmware, motor control, інтеграція сенсорів, автономна навігація, ROS2. Лід — Product Owner для підсистеми Control System.",
+      "Firmware, motor control, sensor integration, autonomous navigation, ROS2. Lead serves as Product Owner for the Control System subsystem.",
     color: "amber",
     parentId: "rnd",
     reportsTo: "R&D Lead / COO",
@@ -208,7 +208,7 @@ export const DEFAULT_BLOCKS: Block[] = [
     code: "R&D-V",
     name: "Video & Comms",
     purpose:
-      "Відеостримінг, радіолінки, шифрування каналу, операторська консоль. Лід — Product Owner для підсистеми Video Streaming.",
+      "Video streaming, radio links, channel encryption, operator control station. Lead serves as Product Owner for the Video Streaming subsystem.",
     color: "amber",
     parentId: "rnd",
     reportsTo: "R&D Lead / COO",
@@ -223,7 +223,7 @@ export const DEFAULT_BLOCKS: Block[] = [
     code: "R&D-SI",
     name: "Systems Integration",
     purpose:
-      "Інтегрує механічні, електронні і software підсистеми. Interface control, system-level test, configuration management. З'являється у фазі Growth.",
+      "Integrates mechanical, electronic, and software subsystems. Interface control, system-level test, configuration management. Appears in the Growth phase.",
     color: "amber",
     parentId: "rnd",
     reportsTo: "R&D Lead / COO",
@@ -239,7 +239,7 @@ export const DEFAULT_BLOCKS: Block[] = [
     code: "MFG-A",
     name: "Assembly",
     purpose:
-      "Механічна збірка, збірка електроніки, розводка, фінальна інтеграція платформ.",
+      "Mechanical assembly, electronics assembly, wiring harnesses, final platform integration.",
     color: "emerald",
     parentId: "mfg",
     reportsTo: "Head of Manufacturing",
@@ -254,7 +254,7 @@ export const DEFAULT_BLOCKS: Block[] = [
     code: "MFG-S",
     name: "Procurement",
     purpose:
-      "Пошук і кваліфікація постачальників, ERP/MRP, second-source програми, керування long-lead позиціями (6–18 місяців lead time на defense-grade комплектуючі).",
+      "Supplier sourcing and qualification, ERP/MRP, second-source programs, long-lead item management (6-18 months lead time on defense-grade components).",
     color: "emerald",
     parentId: "mfg",
     reportsTo: "Head of Manufacturing",
@@ -269,7 +269,7 @@ export const DEFAULT_BLOCKS: Block[] = [
     code: "MFG-PR",
     name: "Prototyping",
     purpose:
-      "Швидке прототипування, 3D друк, одиничні CNC-деталі, tooling. Відокремлюється від Assembly у фазі Growth, щоб уникнути bottlenecks.",
+      "Rapid prototyping, 3D printing, one-off CNC parts, tooling. Separates from Assembly in the Growth phase to avoid bottlenecks.",
     color: "emerald",
     parentId: "mfg",
     reportsTo: "Head of Manufacturing",
@@ -293,14 +293,14 @@ export const DEFAULT_ROLES: Role[] = [
     count: 1,
     phase: 1,
     responsibilities: [
-      "Стратегічний напрям компанії",
-      "Урядові відносини (МО, Генштаб, procurement-агентства)",
-      "Керування інвесторськими і донорськими програмами",
-      "Незалежна ескалація для Quality-питань",
-      "M&A та стратегічні партнерства",
+      "Company strategic direction",
+      "Government relations (MoD, General Staff, procurement agencies)",
+      "Investor and donor program management",
+      "Independent escalation path for Quality issues",
+      "M&A and strategic partnerships",
     ],
     skills: [
-      "Досвід у defense-індустрії",
+      "Defense industry experience",
       "Government procurement",
       "Fundraising",
       "Engineering literacy",
@@ -315,12 +315,12 @@ export const DEFAULT_ROLES: Role[] = [
     count: 1,
     phase: 1,
     responsibilities: [
-      "Технічна стратегія і прогрес TRL",
-      "Координація трьох R&D-напрямків і розподіл ресурсів",
-      "Головування на PDR, CDR, TRR, PRR design review gates",
-      "Керування 70 / 30 dual-portfolio",
-      "Володіння процесом Engineering Change Order (ECO)",
-      "Головний engineering-інтерфейс до customer program office",
+      "Technical strategy and TRL progression",
+      "Coordination of three R&D tracks and resource allocation",
+      "Chairing PDR, CDR, TRR, PRR design review gates",
+      "Managing the 70 / 30 dual-portfolio split",
+      "Ownership of the Engineering Change Order (ECO) process",
+      "Primary engineering interface to customer program office",
     ],
     skills: [
       "Systems engineering background",
@@ -338,10 +338,10 @@ export const DEFAULT_ROLES: Role[] = [
     count: 1,
     phase: 1,
     responsibilities: [
-      "Шасі, підвіска, трансмісія, дизайн корпусу",
-      "Інтеграція payload",
+      "Chassis, suspension, drivetrain, hull design",
+      "Payload integration",
       "CAD/CAE, FEA, structural analysis",
-      "Product Owner для лінії платформ",
+      "Product Owner for the platform line",
     ],
     skills: ["SolidWorks", "ANSYS", "FEA", "Mechanical design leadership"],
   },
@@ -354,9 +354,9 @@ export const DEFAULT_ROLES: Role[] = [
     phase: 1,
     responsibilities: [
       "Firmware architecture",
-      "Motor control і інтеграція сенсорів",
-      "Стек автономної навігації",
-      "Product Owner для Control System",
+      "Motor control and sensor integration",
+      "Autonomous navigation stack",
+      "Product Owner for the Control System",
     ],
     skills: ["C/C++", "RTOS", "ROS2", "Embedded Linux"],
   },
@@ -369,8 +369,8 @@ export const DEFAULT_ROLES: Role[] = [
     phase: 1,
     responsibilities: [
       "Video streaming pipeline",
-      "Дизайн радіолінка",
-      "Шифрування каналу",
+      "Radio link design",
+      "Channel encryption",
       "Operator control station",
     ],
     skills: ["GStreamer", "FFmpeg", "SDR", "RF engineering"],
@@ -383,9 +383,9 @@ export const DEFAULT_ROLES: Role[] = [
     count: 3,
     phase: 1,
     responsibilities: [
-      "Детальний механічний дизайн",
-      "Креслення і BOMs",
-      "DfM / DfA ревʼю з Manufacturing",
+      "Detailed mechanical design",
+      "Drawings and BOMs",
+      "DfM / DfA reviews with Manufacturing",
     ],
     skills: ["SolidWorks", "GD&T", "Prototyping"],
   },
@@ -397,8 +397,8 @@ export const DEFAULT_ROLES: Role[] = [
     count: 2,
     phase: 1,
     responsibilities: [
-      "Імплементація firmware",
-      "Розробка драйверів",
+      "Firmware implementation",
+      "Driver development",
       "Sensor fusion",
     ],
     skills: ["C/C++", "Linux", "ROS2", "CAN/Ethernet"],
@@ -411,9 +411,9 @@ export const DEFAULT_ROLES: Role[] = [
     count: 1,
     phase: 1,
     responsibilities: [
-      "Оптимізація video encoder / decoder",
-      "Тюнінг радіолінка",
-      "Польовий RF troubleshooting",
+      "Video encoder / decoder optimization",
+      "Radio link tuning",
+      "Field RF troubleshooting",
     ],
     skills: ["H.264/265", "SDR", "RF measurement"],
   },
@@ -426,10 +426,10 @@ export const DEFAULT_ROLES: Role[] = [
     count: 1,
     phase: 1,
     responsibilities: [
-      "Production planning і потужності",
-      "Покращення процесів",
-      "EHS і дисципліна на shop-floor",
-      "Прямий шлях ескалації від QA до CEO",
+      "Production planning and capacity",
+      "Process improvement",
+      "EHS and shop-floor discipline",
+      "Direct QA-to-CEO escalation path",
     ],
     skills: [
       "Low-volume high-mix manufacturing",
@@ -445,9 +445,9 @@ export const DEFAULT_ROLES: Role[] = [
     count: 3,
     phase: 1,
     responsibilities: [
-      "Механічна збірка і розводка",
-      "Збірка електроніки за IPC-стандартами",
-      "Фінальна інтеграція платформ",
+      "Mechanical assembly and wiring harnesses",
+      "Electronics assembly per IPC standards",
+      "Final platform integration",
     ],
     skills: ["IPC-A-610", "Soldering", "Precision assembly"],
   },
@@ -459,10 +459,10 @@ export const DEFAULT_ROLES: Role[] = [
     count: 1,
     phase: 1,
     responsibilities: [
-      "Пошук і кваліфікація постачальників",
-      "Керування PO і ERP",
-      "Second-source програми",
-      "Трекінг long-lead items",
+      "Supplier sourcing and qualification",
+      "PO and ERP management",
+      "Second-source programs",
+      "Long-lead item tracking",
     ],
     skills: ["ERP/MRP", "Defense supply chain", "Export-aware sourcing"],
   },
@@ -474,9 +474,9 @@ export const DEFAULT_ROLES: Role[] = [
     count: 1,
     phase: 1,
     responsibilities: [
-      "Incoming, in-process і final inspection",
-      "Lifecycle документація і NCR",
-      "Підтримка державних acceptance tests",
+      "Incoming, in-process, and final inspection",
+      "Lifecycle documentation and NCR",
+      "Government acceptance test support",
     ],
     skills: ["ISO 9001", "AS9100", "MIL-STD familiarity"],
   },
@@ -489,9 +489,9 @@ export const DEFAULT_ROLES: Role[] = [
     count: 1,
     phase: 1,
     responsibilities: [
-      "Підготовка і подача тендерів",
-      "Керування контрактами і поставка CDRL",
-      "Відносини з державними замовниками",
+      "Tender preparation and submission",
+      "Contract management and CDRL delivery",
+      "Government customer relations",
     ],
     skills: ["Government procurement", "Proposal writing", "CRM"],
   },
@@ -503,9 +503,9 @@ export const DEFAULT_ROLES: Role[] = [
     count: 1,
     phase: 1,
     responsibilities: [
-      "Мережа партнерів і дистрибʼюторів",
-      "Міжнародні виставки",
-      "Консультації з export control (ITAR / EAR) для BD",
+      "Partner and distributor network",
+      "International exhibitions",
+      "Export control advisory (ITAR / EAR) for BD",
     ],
     skills: ["Export control", "International BD", "Defense markets"],
   },
@@ -518,9 +518,9 @@ export const DEFAULT_ROLES: Role[] = [
     count: 1,
     phase: 1,
     responsibilities: [
-      "Бухгалтерія, contract accounting",
-      "Бюджетування і звітність",
-      "Cost accounting для державних контрактів",
+      "Bookkeeping, contract accounting",
+      "Budgeting and financial reporting",
+      "Cost accounting for government contracts",
     ],
     skills: ["Government contract accounting", "Financial reporting"],
   },
@@ -532,9 +532,9 @@ export const DEFAULT_ROLES: Role[] = [
     count: 2,
     phase: 1,
     responsibilities: [
-      "Рекрутинг і onboarding",
-      "Payroll і HR records",
-      "Відвантаження, склад і логістика доставки",
+      "Recruiting and onboarding",
+      "Payroll and HR records",
+      "Shipping, warehousing, and delivery logistics",
     ],
     skills: ["HR operations", "Logistics coordination"],
   },
@@ -547,9 +547,9 @@ export const DEFAULT_ROLES: Role[] = [
     count: 1,
     phase: 2,
     responsibilities: [
-      "Program governance по всіх платформах",
-      "Керування ризиком і графіком",
-      "Звітність замовнику і deliverables",
+      "Program governance across all platforms",
+      "Risk and schedule management",
+      "Customer reporting and deliverables",
     ],
     skills: ["PMP / PRINCE2", "Defense program management"],
   },
@@ -561,10 +561,10 @@ export const DEFAULT_ROLES: Role[] = [
     count: 1,
     phase: 2,
     responsibilities: [
-      "Програма facility security",
-      "Classification і access control",
+      "Facility security program",
+      "Classification and access control",
       "NIST 800-171 / CMMC compliance",
-      "Empowered official для export control",
+      "Empowered official for export control",
     ],
     skills: ["FSO training", "ITAR/EAR", "NIST 800-171"],
   },
@@ -575,10 +575,10 @@ export const DEFAULT_ROLES: Role[] = [
 export const DEFAULT_RACI: RaciActivity[] = [
   {
     id: "a-requirements",
-    name: "Збір вимог замовника",
+    name: "Customer requirements capture",
     category: "Product lifecycle",
     description:
-      "Зрозуміти і задокументувати, що саме хоче державний замовник.",
+      "Understand and document what the government customer needs.",
     assignments: {
       ceo: "C",
       bdg: "R",
@@ -593,10 +593,10 @@ export const DEFAULT_RACI: RaciActivity[] = [
   },
   {
     id: "a-architecture",
-    name: "Системна архітектура",
+    name: "System architecture",
     category: "Product lifecycle",
     description:
-      "Top-level архітектура нової платформи або підсистеми — bill-of-materials функцій.",
+      "Top-level architecture for a new platform or subsystem — functional bill-of-materials.",
     assignments: {
       ceo: "I",
       bdg: "I",
@@ -611,9 +611,9 @@ export const DEFAULT_RACI: RaciActivity[] = [
   },
   {
     id: "a-detailed-design",
-    name: "Детальний engineering-дизайн",
+    name: "Detailed engineering design",
     category: "Product lifecycle",
-    description: "Схеми, firmware, механічні креслення, заморозка BOM.",
+    description: "Schematics, firmware, mechanical drawings, BOM freeze.",
     assignments: {
       ceo: "",
       bdg: "",
@@ -628,9 +628,9 @@ export const DEFAULT_RACI: RaciActivity[] = [
   },
   {
     id: "a-prototyping",
-    name: "Збірка прототипу",
+    name: "Prototype build",
     category: "Product lifecycle",
-    description: "Перша фізична збірка нового дизайну.",
+    description: "First physical build of a new design.",
     assignments: {
       ceo: "",
       bdg: "I",
@@ -645,10 +645,10 @@ export const DEFAULT_RACI: RaciActivity[] = [
   },
   {
     id: "a-env-testing",
-    name: "Environmental і EMC тестування",
+    name: "Environmental and EMC testing",
     category: "Quality",
     description:
-      "MIL-STD-810 environmental, MIL-STD-461 EMC, функціональні і кліматичні тести.",
+      "MIL-STD-810 environmental, MIL-STD-461 EMC, functional and climatic tests.",
     assignments: {
       ceo: "I",
       bdg: "I",
@@ -663,10 +663,10 @@ export const DEFAULT_RACI: RaciActivity[] = [
   },
   {
     id: "a-field-acceptance",
-    name: "Державні польові acceptance trials",
+    name: "Government field acceptance trials",
     category: "Quality",
     description:
-      "On-range acceptance trials з військовими end-users і procurement-агентством.",
+      "On-range acceptance trials with military end-users and the procurement agency.",
     assignments: {
       ceo: "A",
       bdg: "C",
@@ -681,10 +681,10 @@ export const DEFAULT_RACI: RaciActivity[] = [
   },
   {
     id: "a-serial-production",
-    name: "Серійне виробництво прийнятої платформи",
+    name: "Serial production of accepted platform",
     category: "Product lifecycle",
     description:
-      "Масштабована збірка після проходження PRR і заморозки дизайну.",
+      "Scaled assembly after passing PRR and design freeze.",
     assignments: {
       ceo: "",
       bdg: "",
@@ -699,10 +699,10 @@ export const DEFAULT_RACI: RaciActivity[] = [
   },
   {
     id: "a-delivery-support",
-    name: "Поставка, тренінг операторів, польова підтримка",
+    name: "Delivery, operator training, field support",
     category: "Product lifecycle",
     description:
-      "Передача hardware, тренінг операторів і in-field підтримка.",
+      "Hardware handoff, operator training, and in-field support.",
     assignments: {
       ceo: "I",
       bdg: "R",
@@ -717,10 +717,10 @@ export const DEFAULT_RACI: RaciActivity[] = [
   },
   {
     id: "a-supplier-qual",
-    name: "Кваліфікація постачальників і second-sourcing",
+    name: "Supplier qualification and second-sourcing",
     category: "Supply chain",
     description:
-      "Пошук, аудит і кваліфікація постачальників; планування other sources для критичних комплектуючих.",
+      "Sourcing, auditing, and qualifying suppliers; planning alternate sources for critical components.",
     assignments: {
       ceo: "I",
       bdg: "",
@@ -735,10 +735,10 @@ export const DEFAULT_RACI: RaciActivity[] = [
   },
   {
     id: "a-export-control",
-    name: "Визначення export control",
+    name: "Export control determination",
     category: "Compliance",
     description:
-      "ITAR / EAR класифікація для комплектуючих, software і документації.",
+      "ITAR / EAR classification for components, software, and documentation.",
     assignments: {
       ceo: "A",
       bdg: "C",
@@ -753,7 +753,7 @@ export const DEFAULT_RACI: RaciActivity[] = [
   },
   {
     id: "a-classification",
-    name: "Поводження з classified програмами",
+    name: "Classified program handling",
     category: "Compliance",
     description:
       "Access control, facility security, classification marking, document control.",
@@ -771,10 +771,10 @@ export const DEFAULT_RACI: RaciActivity[] = [
   },
   {
     id: "a-proposals",
-    name: "Написання proposals і тендерів",
+    name: "Proposal and tender writing",
     category: "BD",
     description:
-      "Capture management, розробка proposal, ціноутворення і подача тендеру.",
+      "Capture management, proposal development, pricing, and tender submission.",
     assignments: {
       ceo: "A",
       bdg: "R",
@@ -789,10 +789,10 @@ export const DEFAULT_RACI: RaciActivity[] = [
   },
   {
     id: "a-budget",
-    name: "Річний бюджет і план найму",
+    name: "Annual budget and hiring plan",
     category: "Operations",
     description:
-      "Top-down бюджет, план найму, runway і розподіл витрат.",
+      "Top-down budget, hiring plan, runway, and cost allocation.",
     assignments: {
       ceo: "A",
       bdg: "C",
@@ -807,10 +807,10 @@ export const DEFAULT_RACI: RaciActivity[] = [
   },
   {
     id: "a-iso",
-    name: "Володіння ISO 9001 / AS9100 QMS",
+    name: "ISO 9001 / AS9100 QMS ownership",
     category: "Compliance",
     description:
-      "Володіння Quality Management System і аудитами.",
+      "Ownership of the Quality Management System and audits.",
     assignments: {
       ceo: "I",
       bdg: "",
@@ -830,9 +830,9 @@ export const DEFAULT_RACI: RaciActivity[] = [
 export function makeDefaultScenario(): Scenario {
   return {
     id: "default",
-    name: "Baseline — Foundation (20 осіб)",
+    name: "Baseline — Foundation (20 people)",
     description:
-      "Стартова конфігурація для 20-особової defense hardware команди. QA вбудована в Manufacturing, Operations об'єднані. Редагуйте блоки, ролі і RACI, щоб моделювати альтернативи.",
+      "Starting configuration for a 20-person defense hardware team. QA is embedded in Manufacturing, Operations are combined. Edit blocks, roles, and RACI to model alternatives.",
     currentPhase: 1,
     blocks: DEFAULT_BLOCKS,
     roles: DEFAULT_ROLES,

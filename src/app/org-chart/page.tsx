@@ -11,9 +11,9 @@ export default function OrgChartPage() {
               Org chart builder
             </h1>
             <p className="text-xs text-zinc-500 mt-1 max-w-2xl">
-              Блоки і суб-команди для поточного сценарію. Виберіть фазу, щоб
-              побачити штат для цього етапу. Клікніть на блок, щоб
-              редагувати його purpose, діапазон штату та reporting line.
+              Blocks and sub-teams for the current scenario. Pick a phase
+              to see headcount at that stage. Click a block to edit its
+              purpose, headcount band, and reporting line.
             </p>
           </div>
         </div>
@@ -21,7 +21,7 @@ export default function OrgChartPage() {
       <Hydrated
         fallback={
           <div className="h-[60vh] rounded-xl border border-dashed border-zinc-300 grid place-items-center text-xs text-zinc-400">
-            Завантаження сценарію з вашого браузера…
+            Loading scenario from your browser…
           </div>
         }
       >
